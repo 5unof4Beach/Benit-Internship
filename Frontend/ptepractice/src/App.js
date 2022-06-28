@@ -1,11 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+function Description() {
+  return (
+    <div>
+      <h3>Day la mieu ta</h3>
+      <p>Mieu ta Mieu ta Mieu ta Mieu ta Mieu ta Mieu ta Mieu ta</p>
+    </div>
+  );
+}
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -15,11 +20,30 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn React Duc Bui 1
         </a>
       </header>
+      <Description></Description>
+
+      <YoutubeItem thumb = "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2022/01/11135302/labrador-retriever-vs-golden-retriever-.png"
+      foot = "https://zoipet.com/wp-content/uploads/2020/03/cho-labrador.jpg"></YoutubeItem>
     </div>
   );
+}
+
+function YoutubeItem(props) {
+  return (
+    <div className="youtube-item">
+      {/* Youtube Items */}
+      <div className="youtube-image">
+        <img src={props.thumb} alt="dog" />
+      </div>
+
+      <div className="youtube-footer">
+        <img src={props.foot} alt="" />
+      </div>
+    </div>
+  )
 }
 
 export default App;
