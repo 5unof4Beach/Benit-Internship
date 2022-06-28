@@ -1,27 +1,43 @@
 package com.example.demo.Courses;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table
 public class Course {
-    int id;
-    int amount;
-    String name;
-    LocalDate start;
-    LocalDate end;
+    @Id
+    @SequenceGenerator(
+            name = "course_sequence",
+            sequenceName = "course_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "course_sequence"
+    )
+    private Integer id;
+    private Integer amount;
+    private String name;
+    private LocalDate openDay;
+    private LocalDate endDay;
 
-    public Course(int id, int amount, String name, LocalDate start, LocalDate end) {
+    public Course() {
+    }
+
+    public Course(int id, int amount, String name, LocalDate openDay, LocalDate endDay) {
         this.id = id;
         this.amount = amount;
         this.name = name;
-        this.start = start;
-        this.end = end;
+        this.openDay = openDay;
+        this.endDay = endDay;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
@@ -29,19 +45,19 @@ public class Course {
         return name;
     }
 
-    public LocalDate getStart() {
-        return start;
+    public LocalDate getOpenDay() {
+        return openDay;
     }
 
-    public LocalDate getEnd() {
-        return end;
+    public LocalDate getEndDay() {
+        return endDay;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
@@ -49,11 +65,22 @@ public class Course {
         this.name = name;
     }
 
-    public void setStart(LocalDate start) {
-        this.start = start;
+    public void setOpenDay(LocalDate openDay) {
+        this.openDay = openDay;
     }
 
-    public void setEnd(LocalDate end) {
-        this.end = end;
+    public void setEndDay(LocalDate endDay) {
+        this.endDay = endDay;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", name='" + name + '\'' +
+                ", openDay=" + openDay +
+                ", endDay=" + endDay +
+                '}';
     }
 }
