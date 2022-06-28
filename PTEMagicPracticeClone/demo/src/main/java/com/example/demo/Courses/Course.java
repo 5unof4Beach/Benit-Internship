@@ -33,6 +33,13 @@ public class Course {
         this.endDay = endDay;
     }
 
+    public Course(Integer amount, String name, LocalDate openDay, LocalDate endDay) {
+        this.amount = amount;
+        this.name = name;
+        this.openDay = openDay;
+        this.endDay = endDay;
+    }
+
     public Integer getId() {
         return id;
     }
