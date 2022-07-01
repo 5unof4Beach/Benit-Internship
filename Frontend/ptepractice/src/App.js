@@ -1,7 +1,7 @@
 import React from "react";
 import {TestButton, Form} from './DOMEvents';
 import { Gift } from "./RandomGift";
-import {TwoWayBinding, TwoWayBindingRadio, TwoWayBindingCheckBox} from "./DOMEvents";
+import {ToDoList,TwoWayBinding, TwoWayBindingRadio, TwoWayBindingCheckBox} from "./DOMEvents";
 
 
 function YoutubeItem( {props} ) {
@@ -47,10 +47,11 @@ function Counter(){
 function App() {
   return (
     <div className="App">
-      <TwoWayBinding></TwoWayBinding>
+      {/* <TwoWayBinding></TwoWayBinding> */}
       {/* <TwoWayBindingRadio></TwoWayBindingRadio> */}
-      <TwoWayBindingCheckBox></TwoWayBindingCheckBox>
+      {/* <TwoWayBindingCheckBox></TwoWayBindingCheckBox> */}
       {/* <Counter></Counter> */}
+      <ToDoList></ToDoList>
     </div>
   );
 }
