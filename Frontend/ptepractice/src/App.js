@@ -1,37 +1,11 @@
-function Description() {
-  return (
-    <div>
-      <h3>Day la mieu ta</h3>
-      <p>Mieu ta Mieu ta Mieu ta Mieu ta Mieu ta Mieu ta Mieu ta</p>
-    </div>
-  );
-}
+import React from "react";
+import {TestButton, Form} from './DOMEvents';
+import { Gift } from "./RandomGift";
+import {TwoWayBinding, TwoWayBindingRadio, TwoWayBindingCheckBox} from "./DOMEvents";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React Duc Bui 1
-        </a>
-      </header>
-      <Description></Description>
 
-      <YoutubeItem thumb = "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2022/01/11135302/labrador-retriever-vs-golden-retriever-.png"
-      foot = "https://zoipet.com/wp-content/uploads/2020/03/cho-labrador.jpg"></YoutubeItem>
-    </div>
-  );
-}
-
-function YoutubeItem(props) {
+function YoutubeItem( {props} ) {
+  console.log(props)
   return (
     <div className="youtube-item">
       {/* Youtube Items */}
@@ -40,10 +14,47 @@ function YoutubeItem(props) {
       </div>
 
       <div className="youtube-footer">
-        <img src={props.foot} alt="" />
+        <img src={props.foot} alt="dog pic" />
       </div>
     </div>
+  );
+}
+
+function Counter(){
+  const [counter, setCounter] = React.useState(1)
+
+  const handleIncrease = () => {
+    setCounter(counter => counter+1)
+    setCounter(counter => counter+1)
+    setCounter(counter => counter+1)
+  }
+
+  const handleDecrease = () => {
+    setCounter(counter => counter-1)
+    setCounter(counter => counter-1)
+    setCounter(counter => counter-1)
+  }
+
+  return(
+    <React.Fragment>
+      <button onClick={handleDecrease}>-</button>
+      <h1>{counter}</h1>
+      <button onClick={handleIncrease}>+</button>
+    </React.Fragment>
   )
 }
 
-export default App;
+function App() {
+  return (
+    <div className="App">
+      <TwoWayBinding></TwoWayBinding>
+      {/* <TwoWayBindingRadio></TwoWayBindingRadio> */}
+      <TwoWayBindingCheckBox></TwoWayBindingCheckBox>
+      {/* <Counter></Counter> */}
+    </div>
+  );
+}
+
+
+
+export {YoutubeItem, Counter, App}
