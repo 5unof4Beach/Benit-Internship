@@ -1,5 +1,6 @@
 import React from "react";
 
+
 function TestButton({ title, href, onClick }) {
   let Component = "button";
 
@@ -35,6 +36,7 @@ const Form = {
   },
 };
 
+
 function TwoWayBinding() {
   const [name, setName] = React.useState("");
 
@@ -46,9 +48,18 @@ function TwoWayBinding() {
 
   return (
     <React.Fragment>
-      <input value={name} onChange={(e) => handleNameChange(e.target.value)} />
+      <input 
+        className="border-black border-[2px]"
+        value={name} 
+        onChange={(e) => handleNameChange(e.target.value)} 
+      />
 
-      <button onClick={(e) => handleNameChange("New Name")}>Change Name</button>
+      <button 
+        className = 'text-3xl font-bold '
+        onClick={(e) => handleNameChange("New Name")}
+      >
+        Change Name
+      </button>
     </React.Fragment>
   );
 }

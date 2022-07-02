@@ -10,6 +10,8 @@ import {
   RealtimeTitle
 } from "./DOMEvents";
 
+import {privateRoutes, publicRoutes} from '../routes/index.js'
+
 function NavBar(){
 
   return(
@@ -29,9 +31,10 @@ function NavBar(){
       </nav>
 
       <Routes>
-        <Route path="/" element={<FirstUseEffect/>}/>
-        <Route path="/news" element={<TwoWayBinding/>}/>
-        <Route path="/contact" element={<RealtimeTitle/>}/>
+        {publicRoutes.map((route, index) => {
+          const Page = route.component
+          return <Route key={index} path={route.path} element={<Page/>}/>
+        })}
 
       </Routes>
     </div>
