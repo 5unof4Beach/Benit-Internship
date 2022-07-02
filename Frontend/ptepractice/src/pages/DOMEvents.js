@@ -96,6 +96,31 @@ function TwoWayBindingRadio() {
     </div>
   );
 }
+
+function Counter() {
+  const [counter, setCounter] = React.useState(1);
+
+  const handleIncrease = () => {
+    setCounter((counter) => counter + 1);
+    setCounter((counter) => counter + 1);
+    setCounter((counter) => counter + 1);
+  };
+
+  const handleDecrease = () => {
+    setCounter((counter) => counter - 1);
+    setCounter((counter) => counter - 1);
+    setCounter((counter) => counter - 1);
+  };
+
+  return (
+    <React.Fragment>
+      <button onClick={handleDecrease}>-</button>
+      <h1>{counter}</h1>
+      <button onClick={handleIncrease}>+</button>
+    </React.Fragment>
+  );
+}
+
 function TwoWayBindingCheckBox() {
   const data = [
     {
@@ -184,6 +209,54 @@ function ToDoList() {
   );
 }
 
+function FirstUseEffect() {
+  const [source, setSource] = React.useState('posts');
+  const [content, setContent] = React.useState([])
+
+  React.useEffect(() => {
+    console.log(source);
+    fetch(`https://jsonplaceholder.typicode.com/${source}`)
+      .then((response) => response.json())
+      .then((json) => setContent(json));
+  }, [source]);
+
+  return (
+    <div>
+      <button onClick={() => setSource("posts")}>Post</button>
+      <button onClick={() => setSource("users")}>User</button>
+      <button onClick={() => setSource("comments")}>Comment</button>
+      {content.map((item, index) => {
+          return <p key={index}>{JSON.stringify(item)}</p>
+      })}
+    </div>
+  );
+}
+
+function RealtimeTitle(){
+
+    const [title, setTitle] = React.useState('title')
+
+    const handleChange = (newTitle) => {
+        setTitle((prev) => newTitle)
+    }
+
+    React.useEffect(() => {
+        window.document.title = title
+        console.log("title changed")
+    }, [title])
+
+    return (
+        <div>
+            <input
+                type='text'
+                onInput={(e) => handleChange(e.target.value)}
+            />
+
+            
+        </div>
+    )
+}
+
 export {
   TestButton,
   Form,
@@ -191,4 +264,7 @@ export {
   TwoWayBindingRadio,
   TwoWayBindingCheckBox,
   ToDoList,
+  FirstUseEffect,
+  RealtimeTitle
 };
+
