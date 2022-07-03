@@ -1,8 +1,15 @@
-import Header from "./Header";
+import React from "react";
+import Header from "../components/Header";
 import Sidebar from "./Sidebar";
 
-function DefaultLayout() {
-    return (  );
+function DefaultLayout({children}) {
+    return ( 
+        <div>
+            <Header></Header>
+            <Sidebar></Sidebar>
+            <div>{children}</div>
+        </div>
+     );
 }
 
 export default DefaultLayout;

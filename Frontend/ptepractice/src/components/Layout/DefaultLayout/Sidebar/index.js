@@ -1,5 +1,7 @@
 function Sidebar() {
-    return (  );
+    return ( 
+        <p>this is side bar</p>
+     );
 }
 
 export default Sidebar;
