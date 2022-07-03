@@ -4,10 +4,32 @@ import Sidebar from "./Sidebar";
 
 function DefaultLayout({children}) {
     return ( 
-        <div>
+        <div
+            className="
+                flex
+                flex-col
+                items-center
+                bg-[#fbea78]
+                w-[100%]
+            "
+        >
             <Header></Header>
-            <Sidebar></Sidebar>
-            <div>{children}</div>
+
+            <div 
+                className="
+                    content
+                    bg-[#fbea78]
+                    h-[1000px]
+                    w-[70%]
+                    flex
+                    justify-start
+                "    
+            >
+                <Sidebar></Sidebar>
+                <div>
+                    {children}
+                </div>
+            </div>
         </div>
      );
 }

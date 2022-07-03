@@ -17,7 +17,7 @@ import { privateRoutes, publicRoutes } from "./routes/index.js";
 function NavBar() {
   return (
     <div className="app">
-      <nav>
+      {/* <nav>
         <ul>
           <li>
             <Link to="/">Home</Link>
@@ -32,7 +32,7 @@ function NavBar() {
             <Link to="/signin">Sign In</Link>
           </li>
         </ul>
-      </nav>
+      </nav> */}
 
       <Routes>
         {publicRoutes.map((route, index) => {
