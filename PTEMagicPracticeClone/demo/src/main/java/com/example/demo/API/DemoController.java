@@ -33,12 +33,11 @@ public class DemoController {
                         loginRequest.getPw()
                 )
         );
-//
+
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
-//
         String jwt = tokenProvider.generateToken((CustomUserDetails) authentication.getPrincipal());
         return new LoginResponse(jwt);
-//        return loginRequest;
     }
 
     @GetMapping("/fake")

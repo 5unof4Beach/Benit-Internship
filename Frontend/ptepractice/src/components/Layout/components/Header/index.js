@@ -1,4 +1,5 @@
 import Item from "./components/items";
+import Logo from "./components/Logo";
 
 function Header() {
     return ( 
@@ -27,10 +28,11 @@ function Header() {
                     items-center
                 "
             >
-                <Item>items1</Item>
-                <Item>items1</Item>
-                <Item>items1</Item>
-                <Item>items1</Item>
+                <Logo></Logo>
+                <Item>item 1</Item>
+                <Item>item 2</Item>
+                <Item>item 3</Item>
+                <Item>item 4</Item>
             </div>
         </header>
      );
