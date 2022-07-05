@@ -43,21 +43,21 @@ public class DemoApplication implements CommandLineRunner {
 		}
 
 
-			User admin = new User();
-			admin.setUsername("admin@gmail.com");
-			admin.setPassword(passwordEncoder.encode("123456"));
-			HashSet<Role> roles = new HashSet<>();
-			roles.add(roleRepo.findByName("ROLE_ADMIN"));
-			roles.add(roleRepo.findByName("ROLE_MEMBER"));
-			admin.setRoles(roles);
+//			User admin = new User();
+//			admin.setUsername("admin@gmail.com");
+//			admin.setPassword(passwordEncoder.encode("123456"));
+//			HashSet<Role> roles = new HashSet<>();
+//			roles.add(roleRepo.findByName("ROLE_ADMIN"));
+//			roles.add(roleRepo.findByName("ROLE_MEMBER"));
+//			admin.setRoles(roles);
 //
-			User admin2 = new User();
-			admin2.setUsername("member@gmail.com");
-			admin2.setPassword(passwordEncoder.encode("123456"));
-			HashSet<Role> roles2 = new HashSet<>();
-			roles2.add(roleRepo.findByName("ROLE_MEMBER"));
-			admin2.setRoles(roles2);
-
-			userRepository.saveAll(List.of(admin, admin2));
+//			User admin2 = new User();
+//			admin2.setUsername("ducbui1");
+//			admin2.setPassword(passwordEncoder.encode("1"));
+//			HashSet<Role> roles2 = new HashSet<>();
+//			roles2.add(roleRepo.findByName("ROLE_MEMBER"));
+//			admin2.setRoles(roles2);
+//
+//			userRepository.saveAll(List.of(admin, admin2));
 	}
 }

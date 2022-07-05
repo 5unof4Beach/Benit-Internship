@@ -1,10 +1,12 @@
 package com.example.demo.Courses;
 
+import com.example.demo.Payload.LoginRequest;
+import com.example.demo.Payload.LoginResponse;
+import com.example.demo.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,4 +29,5 @@ public class CourseController {
     public List<Course> getCourseByName(@PathVariable("name") String name){
         return courseService.getCourseByName(name);
     }
+
 }

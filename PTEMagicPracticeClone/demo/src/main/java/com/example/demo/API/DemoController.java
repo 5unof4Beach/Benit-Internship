@@ -5,6 +5,7 @@ import com.example.demo.Payload.FakeMessage;
 import com.example.demo.Payload.LoginRequest;
 import com.example.demo.Payload.LoginResponse;
 import com.example.demo.User.CustomUserDetails;
+import com.example.demo.User.UserService;
 import com.example.demo.WebSecurity.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +21,9 @@ import javax.validation.Valid;
 public class DemoController {
     @Autowired
     AuthenticationManager authenticationManager;
+
+    @Autowired
+    UserService userService;
 
     @Autowired
     private JwtTokenProvider tokenProvider;
@@ -38,6 +42,12 @@ public class DemoController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = tokenProvider.generateToken((CustomUserDetails) authentication.getPrincipal());
         return new LoginResponse(jwt);
+    }
+
+    @PostMapping("/signupv2")
+    public LoginResponse createUser(@Valid @RequestBody LoginRequest loginRequest) {
+        String mess = userService.createNewUser(loginRequest);
+        return new LoginResponse(mess);
     }
 
     @GetMapping("/fake")

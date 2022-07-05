@@ -1,12 +1,17 @@
 package com.example.demo.User;
-
+import com.example.demo.Payload.LoginRequest;
 import com.example.demo.Role.Role;
+import com.example.demo.Role.RoleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -14,8 +19,12 @@ import java.util.Set;
 
 @Service
 public class UserService implements UserDetailsService {
-
     private UserRepository userRepository;
+
+    @Autowired
+    RoleRepo roleRepo;
+
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
     public UserService(UserRepository userRepository){
@@ -53,6 +62,17 @@ public class UserService implements UserDetailsService {
     }
 
 
+    public String createNewUser(LoginRequest loginRequest){
+        User user = new User();
+        user.setUsername(loginRequest.getUsername());
+        user.setPassword(passwordEncoder.encode(loginRequest.getPw()));
+        HashSet<Role> roles = new HashSet<>();
+        roles.add(roleRepo.findByName("ROLE_MEMBER"));
+        user.setRoles(roles);
 
+        userRepository.save(user);
+
+        return loginRequest.toString();
+    }
 
 }
