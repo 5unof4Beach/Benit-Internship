@@ -28,7 +28,7 @@ public class DemoController {
     @Autowired
     private JwtTokenProvider tokenProvider;
 
-    @PostMapping("/loginv2")
+    @PostMapping("/login")
     public LoginResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
@@ -44,7 +44,7 @@ public class DemoController {
         return new LoginResponse(jwt);
     }
 
-    @PostMapping("/signupv2")
+    @PostMapping("/signup")
     public LoginResponse createUser(@Valid @RequestBody LoginRequest loginRequest) {
         String mess = userService.createNewUser(loginRequest);
         return new LoginResponse(mess);
@@ -53,5 +53,9 @@ public class DemoController {
     @GetMapping("/fake")
     public FakeMessage randomStuff(){
         return new FakeMessage("JWT Hợp lệ mới có thể thấy được message này");
+    }
+    @GetMapping("/admin")
+    public FakeMessage admin(){
+        return new FakeMessage("Admin mới có thể thấy được message này");
     }
 }

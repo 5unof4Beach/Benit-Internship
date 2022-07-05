@@ -14,10 +14,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@Transactional
 public class UserService implements UserDetailsService {
     private UserRepository userRepository;
 
@@ -68,6 +70,20 @@ public class UserService implements UserDetailsService {
         user.setPassword(passwordEncoder.encode(loginRequest.getPw()));
         HashSet<Role> roles = new HashSet<>();
         roles.add(roleRepo.findByName("ROLE_MEMBER"));
+        user.setRoles(roles);
+
+        userRepository.save(user);
+
+        return loginRequest.toString();
+    }
+
+    public String createNewAdmin(LoginRequest loginRequest){
+        User user = new User();
+        user.setUsername(loginRequest.getUsername());
+        user.setPassword(passwordEncoder.encode(loginRequest.getPw()));
+        HashSet<Role> roles = new HashSet<>();
+        roles.add(roleRepo.findByName("ROLE_MEMBER"));
+        roles.add(roleRepo.findByName("ROLE_ADMIN"));
         user.setRoles(roles);
 
         userRepository.save(user);

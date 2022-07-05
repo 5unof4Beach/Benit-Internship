@@ -19,8 +19,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    UserService userService;
+    private UserService userService;
 
+    @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter(){
         return new JwtAuthenticationFilter();
     }
@@ -43,6 +44,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    // Tao AuthenticationManager theo userService và passwordEncoder của mình
+    //AuthenticationManager này sẽ được dùng để xác thực mật khâu request đăng nhập
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService)
                 .passwordEncoder(passwordEncoder());
@@ -58,10 +61,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/jwt/signupv2","/jwt/loginv2").permitAll()
 //                .antMatchers("/jwt/fake").authenticated();
 //
-//        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-        http.cors().and().csrf().disable();
+        http.cors()
+                .and()
+                .csrf().disable()
+                //Phải set cái này nếu ko jwt ko có tác dụng
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
         http.authorizeRequests()
-                .antMatchers("/").permitAll();
+                .antMatchers("/jwt/login","/jwt/signup").permitAll()
+                .antMatchers("/jwt/fake", "/jwt/admin").authenticated();
+
+        http.authorizeRequests().antMatchers("/jwt/admin").access("hasRole('ROLE_ADMIN')");
+
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
 //    @Override
