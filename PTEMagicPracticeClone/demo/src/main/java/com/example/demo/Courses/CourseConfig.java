@@ -27,7 +27,7 @@ public class CourseConfig {
                     LocalDate.of(2022, Month.NOVEMBER, 10)
             );
 
-            repository.saveAll(List.of(html, css));
+//            repository.saveAll(List.of(html, css));
         };
     }
 }

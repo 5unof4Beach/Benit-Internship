@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
 //Annotation nay de tu dong tao getter setter
 @Data
@@ -16,14 +17,16 @@ import java.util.Collections;
 public class CustomUserDetails implements UserDetails {
     User user;
 
+    Set<GrantedAuthority> grantedAuthorities;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
+        return grantedAuthorities;
     }
 
     @Override
     public String getPassword() {
-        return user.getPw();
+        return user.getPassword();
     }
 
     @Override
