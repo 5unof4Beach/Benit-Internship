@@ -41,8 +41,6 @@ function NavBar() {
           
           if(route.layout){
             Layout = route.layout
-            console.log(`${route.path} has layout`)
-            console.log(Layout)
           }
           {/* else if(route.layout === undefined){
             Layout = React.Fragment
