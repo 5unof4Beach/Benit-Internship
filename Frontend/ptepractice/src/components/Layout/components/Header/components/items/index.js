@@ -1,14 +1,22 @@
+import { Routes, Route, Link } from "react-router-dom";
+
 function Item(props) {
+    let link = '/'
+
+    if(props.link){
+        link = props.link
+    }
 
     return (  
-        <span
+        <Link
             className="
                 bg-[#aaaa]
                 rounded-[5px]
             "
+            to={link}
         >
             {props.children}
-        </span>
+        </Link>
     );
 }
 

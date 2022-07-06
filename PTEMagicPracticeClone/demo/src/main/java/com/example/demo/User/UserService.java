@@ -1,5 +1,6 @@
 package com.example.demo.User;
 import com.example.demo.Payload.LoginRequest;
+import com.example.demo.Payload.SignupRequest;
 import com.example.demo.Role.Role;
 import com.example.demo.Role.RoleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,23 +65,25 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public String createNewUser(LoginRequest loginRequest){
+    public String createNewUser(SignupRequest signupRequest){
         User user = new User();
-        user.setUsername(loginRequest.getUsername());
-        user.setPassword(passwordEncoder.encode(loginRequest.getPw()));
+        user.setUsername(signupRequest.getUsername());
+        user.setPassword(passwordEncoder.encode(signupRequest.getPassword()));
+        user.setEmail(signupRequest.getEmail());
         HashSet<Role> roles = new HashSet<>();
         roles.add(roleRepo.findByName("ROLE_MEMBER"));
         user.setRoles(roles);
 
         userRepository.save(user);
 
-        return loginRequest.toString();
+        return signupRequest.toString();
     }
 
-    public String createNewAdmin(LoginRequest loginRequest){
+    public String createNewAdmin(SignupRequest signupRequest){
         User user = new User();
-        user.setUsername(loginRequest.getUsername());
-        user.setPassword(passwordEncoder.encode(loginRequest.getPw()));
+        user.setUsername(signupRequest.getUsername());
+        user.setPassword(passwordEncoder.encode(signupRequest.getPassword()));
+        user.setEmail(signupRequest.getEmail());
         HashSet<Role> roles = new HashSet<>();
         roles.add(roleRepo.findByName("ROLE_MEMBER"));
         roles.add(roleRepo.findByName("ROLE_ADMIN"));
@@ -88,7 +91,7 @@ public class UserService implements UserDetailsService {
 
         userRepository.save(user);
 
-        return loginRequest.toString();
+        return signupRequest.toString();
     }
 
 }

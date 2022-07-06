@@ -4,6 +4,7 @@ package com.example.demo.API;
 import com.example.demo.Payload.FakeMessage;
 import com.example.demo.Payload.LoginRequest;
 import com.example.demo.Payload.LoginResponse;
+import com.example.demo.Payload.SignupRequest;
 import com.example.demo.User.CustomUserDetails;
 import com.example.demo.User.UserService;
 import com.example.demo.WebSecurity.JwtTokenProvider;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
+@CrossOrigin
 @RequestMapping(path = "/jwt")
 public class DemoController {
     @Autowired
@@ -34,20 +36,20 @@ public class DemoController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getUsername(),
-                        loginRequest.getPw()
+                        loginRequest.getPassword()
                 )
         );
 
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = tokenProvider.generateToken((CustomUserDetails) authentication.getPrincipal());
-        return new LoginResponse(jwt);
+        return new LoginResponse(jwt, loginRequest.getUsername());
     }
 
     @PostMapping("/signup")
-    public LoginResponse createUser(@Valid @RequestBody LoginRequest loginRequest) {
-        String mess = userService.createNewUser(loginRequest);
-        return new LoginResponse(mess);
+    public LoginResponse createUser(@Valid @RequestBody SignupRequest signupRequest) {
+        String mess = userService.createNewUser(signupRequest);
+        return new LoginResponse(mess, signupRequest.getUsername());
     }
 
     @GetMapping("/fake")

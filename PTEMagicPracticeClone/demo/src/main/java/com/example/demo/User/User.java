@@ -33,13 +33,19 @@ public class User implements Serializable {
     @Column(name = "pw", nullable = false)
     private String password;
 
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+
     @ManyToMany
-//    @JoinTable(
-//            name = "user_role",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id")
-//    )
     private Set<Role> roles;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Long getId() {
         return id;

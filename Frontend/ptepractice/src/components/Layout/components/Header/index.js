@@ -32,7 +32,7 @@ function Header() {
                 <Item>item 1</Item>
                 <Item>item 2</Item>
                 <Item>item 3</Item>
-                <Item>item 4</Item>
+                <Item link='/signin'>Sign In</Item>
             </div>
         </header>
      );

@@ -29,13 +29,16 @@ public class GoogleUtils {
 		String response = Request.Post(link)
 				.bodyForm(Form.form().add("client_id", env.getProperty("google.app.id"))
 						.add("client_secret", env.getProperty("google.app.secret"))
-						.add("redirect_uri", env.getProperty("google.redirect.uri")).add("code", code)
+						.add("redirect_uri", env.getProperty("google.redirect.uri"))
+						.add("code", code)
 						.add("grant_type", "authorization_code").build())
 				.execute().returnContent().asString();
 
 		ObjectMapper mapper = new ObjectMapper();
-		JsonNode node = mapper.readTree(response).get("access_token");
-		return node.textValue();
+		JsonNode accessToken = mapper.readTree(response).get("access_token");
+		JsonNode refreshToken = mapper.readTree(response).get("refresh_token");
+
+		return accessToken.textValue();
 	}
 
 	public GooglePojo getUserInfo(final String accessToken) throws ClientProtocolException, IOException {

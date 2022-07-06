@@ -61,8 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/jwt/signupv2","/jwt/loginv2").permitAll()
 //                .antMatchers("/jwt/fake").authenticated();
 //
-        http.cors()
-                .and()
+        http.cors().disable()
                 .csrf().disable()
                 //Phải set cái này nếu ko jwt ko có tác dụng
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
