@@ -9,7 +9,7 @@ function DropdownMenu(props) {
   const dropdownRef = useRef(null);
 
   useEffect(() => {
-    setMenuHeight(dropdownRef.current?.lastChild.offsetHeight + 20);
+    setMenuHeight(dropdownRef.current.lastChild.offsetHeight + 20);
   }, []);
 
   function calcHeight(el) {
@@ -37,7 +37,7 @@ function DropdownMenu(props) {
         timeout={500}
         classNames="menu-primary"
         // unmountOnExit
-        onEnter={calcHeight}
+        onEnter={(el) => calcHeight(el)}
       >
         <div className="menu" onClick={() => setSelected(!selected)}>
           {props.parentNode}
@@ -59,10 +59,12 @@ function DropdownMenu(props) {
 
 function DropdownItem(props) {
   return (
-    <a href="#" className="menu-item">
+    <a href="#" 
+      className="menu-item justify-around items-center"
+    >
       <span className="icon-button">{props.leftIcon}</span>
-      {props.children}
       <span className="icon-right">{props.rightIcon}</span>
+      {props.children}
     </a>
   );
 }
