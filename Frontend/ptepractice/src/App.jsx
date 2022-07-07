@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Router } from "react-router-dom";
 import { Gift } from "./pages/RandomGift";
 import {
   ToDoList,
@@ -10,63 +10,43 @@ import {
   RealtimeTitle,
 } from "./pages/DOMEvents";
 
+import { LoginContext } from "./Helper/Context";
+
 import { DefaultLayout } from "./components/Layout";
 
 import { privateRoutes, publicRoutes } from "./routes/index.js";
 
-function NavBar() {
+function App() {
+  const [loggedIn, setLoggedIn ] = React.useState(false);
+
   return (
     <div className="app">
-      {/* <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/news">News</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact</Link>
-          </li>
-          <li>
-            <Link to="/signin">Sign In</Link>
-          </li>
-        </ul>
-      </nav> */}
+      <LoginContext.Provider value={{ loggedIn, setLoggedIn }}>
+        {/* <Router> */}
+          <Routes>
+            {publicRoutes.map((route, index) => {
+              const Page = route.component;
+              let Layout = DefaultLayout;
 
-      <Routes>
-        {publicRoutes.map((route, index) => {
-          const Page = route.component;
-          let Layout = DefaultLayout
-          
-          if(route.layout){
-            Layout = route.layout
-          }
-          {/* else if(route.layout === undefined){
-            Layout = React.Fragment
-          } */}
-
-          return (
-            <Route
-              key={index}
-              path={route.path}
-              element={
-                <Layout>
-                  <Page />
-                </Layout>
+              if (route.layout) {
+                Layout = route.layout;
               }
-            />
-          );
-        })}
-      </Routes>
-    </div>
-  );
-}
 
-function App() {
-  return (
-    <div className="App">
-      <NavBar></NavBar>
+              return (
+                <Route
+                  key={index}
+                  path={route.path}
+                  element={
+                    <Layout>
+                      <Page />
+                    </Layout>
+                  }
+                />
+              );
+            })}
+          </Routes>
+        {/* </Router> */}
+      </LoginContext.Provider>
     </div>
   );
 }

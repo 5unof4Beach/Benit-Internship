@@ -9,7 +9,7 @@ function DefaultLayout({children}) {
                 flex
                 flex-col
                 items-center
-                bg-[#fbea78]
+                bg-[#F9F9F9]
                 w-[100%]
             "
         >
@@ -18,7 +18,7 @@ function DefaultLayout({children}) {
             <div 
                 className="
                     content
-                    bg-[#fbea78]
+                    bg-[#F9F9F9]
                     h-[1000px]
                     w-[70%]
                     flex

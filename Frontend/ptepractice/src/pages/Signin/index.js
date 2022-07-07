@@ -1,12 +1,18 @@
 import React from "react"
 import {useNavigate} from 'react-router-dom'
+import { LoginContext } from "../../Helper/Context"
 
 function Signin() {
 
     const [userName, setUserName] = React.useState('')
     const [password, setPassword] = React.useState('')
-
+    const{loggedIn, setLoggedIn} = React.useContext(LoginContext)
     let navigate = useNavigate()
+
+    const handleLoggedIn = (state)=> {
+      setLoggedIn(state)
+    }
+
     const handleSignIn = ()=> {
 
         let options = {
@@ -31,10 +37,12 @@ function Signin() {
             console.log(res)
             localStorage.setItem("accessToken", res.accessToken)
             localStorage.setItem("userName", res.userName)
+            handleLoggedIn(!loggedIn)
             navigate('/')
         })
-        .catch(err => {
+        .catch((Error) => {
             console.log("Dang nhap ko thanh cong")
+            console.log(Error)
         })
     }
 

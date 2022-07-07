@@ -1,7 +1,12 @@
 import Item from "./components/items";
 import Logo from "./components/Logo";
+import Button from "../../../Button";
+import { LoginContext } from "../../../../Helper/Context";
+import React from "react";
 
 function Header() {
+    const{loggedIn, setLogin} = React.useContext(LoginContext)
+
     return ( 
         <header
             className="
@@ -9,7 +14,7 @@ function Header() {
                 shadow-lg 
                 h-[82px]
                 w-[100%]
-                bg-[#FFFFFF]
+                bg-[#FECC65]
                 text-2xl
                 flex
                 justify-center
@@ -22,17 +27,33 @@ function Header() {
                 className="
                     h-full
                     w-[70%]
-                    bg-[#EEEE]
+                    bg-[#FECC65]
                     flex
-                    justify-around
+                    justify-between
                     items-center
                 "
             >
-                <Logo></Logo>
-                <Item>item 1</Item>
-                <Item>item 2</Item>
-                <Item>item 3</Item>
-                <Item link='/signin'>Sign In</Item>
+                <Logo
+                    className="
+                        grow-[1]
+                    "
+                >
+
+                </Logo>
+                <div
+                    className="
+                        action
+                        grow-[5]
+                        flex
+                        justify-between
+                    "
+                >
+                    <Item title="item 1">item 1</Item>
+                    <Item title="item 2">item 2</Item>
+                    <Item title="item 3">item 3</Item>
+                    <Item title="item 4" link='/news'>item 4</Item>
+                    {!loggedIn ? <Item title="Sign In" link='/signin'>Sign In</Item>:<Item title="Sign Out" link='/signout'>Sign Out</Item>}
+                </div>
             </div>
         </header>
      );

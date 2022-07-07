@@ -1,22 +1,40 @@
 import { Routes, Route, Link } from "react-router-dom";
+import { useState } from "react";
 
-function Item(props) {
-    let link = '/'
+function Item({className,children,title,...props}) {
+
+    const [open, setOpen] = useState(false)
+
+    let link = '#'
 
     if(props.link){
         link = props.link
     }
 
+    if(className){
+
+    }
+
     return (  
-        <Link
+        <div
             className="
-                bg-[#aaaa]
-                rounded-[5px]
+                w-[100%]
+                flex
+                flex-col
+                items-center
             "
-            to={link}
         >
-            {props.children}
-        </Link>
+            <Link
+                className={className}
+                to={link}
+                onClick={() => setOpen(!open)}
+            >
+                {title}
+            </Link>
+            
+            {open && children}
+
+        </div>
     );
 }
 
