@@ -5,6 +5,16 @@ function Item({className,children,title,...props}) {
 
     const [open, setOpen] = useState(false)
 
+    let defaultClassNames = `
+            w-[100%]
+            border-[2px]
+            border-black
+            text-black
+            m-[5px]
+            flex
+            justify-center
+        `
+
     let link = '#'
 
     if(props.link){
@@ -12,17 +22,12 @@ function Item({className,children,title,...props}) {
     }
 
     if(className){
-
+        defaultClassNames = className
     }
 
     return (  
         <div
-            className="
-                w-[100%]
-                flex
-                flex-col
-                items-center
-            "
+            className={defaultClassNames}
         >
             <Link
                 className={className}

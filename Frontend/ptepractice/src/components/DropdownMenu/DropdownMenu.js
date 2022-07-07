@@ -1,110 +1,71 @@
 import React, { useState, useEffect, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
+import styled from "styled-components";
+import './style.css'
 
-import { ReactComponent as CogIcon } from "../../icons/cog.svg";
-import { ReactComponent as ChevronIcon } from "../../icons/chevron.svg";
-import { ReactComponent as ArrowIcon } from "../../icons/arrow.svg";
-import { ReactComponent as BoltIcon } from "../../icons/bolt.svg";
-
-function DropdownMenu() {
-  const [activeMenu, setActiveMenu] = useState("main");
+function DropdownMenu(props) {
+  const [selected, setSelected] = useState(true);
   const [menuHeight, setMenuHeight] = useState(null);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
-    setMenuHeight(dropdownRef.current?.firstChild.offsetHeight + 30);
+    setMenuHeight(dropdownRef.current?.lastChild.offsetHeight + 20);
   }, []);
 
   function calcHeight(el) {
     const height = el.offsetHeight;
-    setMenuHeight(height + 30);
-  }
-
-  function DropdownItem(props) {
-    return (
-      <a
-        href="#"
-        className="menu-item"
-        onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}
-      >
-        <span className="icon-button">{props.leftIcon}</span>
-        {props.children}
-        <span className="icon-right">{props.rightIcon}</span>
-      </a>
-    );
+    setMenuHeight(height + 20);
   }
 
   return (
     <div
-        style={{ height: menuHeight }} 
-        ref={dropdownRef}
-        className="
+      style={{ height: menuHeight }}
+      ref={dropdownRef}
+      className="
             dropdown
             relative
             w-[100%]
-            bg-[#242526]
+            bg-transparent
             rounded-[8px]
-            border-[1px]
             p-[1rem]
             overflow-hidden
             transition-opacity
         "
     >
       <CSSTransition
-        in={activeMenu === "main"}
+        in={selected}
         timeout={500}
         classNames="menu-primary"
         // unmountOnExit
         onEnter={calcHeight}
       >
-        <div className="menu">
-          <DropdownItem
-            leftIcon={<CogIcon />}
-            rightIcon={<ChevronIcon />}
-            goToMenu="settings"
-          >
-            Settings
-          </DropdownItem>
+        <div className="menu" onClick={() => setSelected(!selected)}>
+          {props.parentNode}
         </div>
       </CSSTransition>
 
       <CSSTransition
-        in={activeMenu === "settings"}
+        in={!selected}
         timeout={500}
         classNames="menu-secondary"
         unmountOnExit
         onEnter={calcHeight}
       >
-        <div className="menu">
-          <DropdownItem goToMenu="main" leftIcon={<ArrowIcon />}>
-            <h2>My Tutorial</h2>
-          </DropdownItem>
-          <DropdownItem leftIcon={<BoltIcon />}>HTML</DropdownItem>
-          <DropdownItem leftIcon={<BoltIcon />}>CSS</DropdownItem>
-          <DropdownItem leftIcon={<BoltIcon />}>JavaScript</DropdownItem>
-          <DropdownItem leftIcon={<BoltIcon />}>Awesome!</DropdownItem>
-        </div>
-      </CSSTransition>
-
-      <CSSTransition
-        in={activeMenu === "animals"}
-        timeout={500}
-        classNames="menu-secondary"
-        unmountOnExit
-        onEnter={calcHeight}
-      >
-        <div className="menu">
-          <DropdownItem goToMenu="main" leftIcon={<ArrowIcon />}>
-            <h2>Animals</h2>
-          </DropdownItem>
-          <DropdownItem leftIcon="🦘">Kangaroo</DropdownItem>
-          <DropdownItem leftIcon="🐸">Frog</DropdownItem>
-          <DropdownItem leftIcon="🦋">Horse?</DropdownItem>
-          <DropdownItem leftIcon="🦔">Hedgehog</DropdownItem>
-        </div>
+        <div className="menu">{props.children}</div>
       </CSSTransition>
     </div>
   );
 }
 
-export default DropdownMenu;
+function DropdownItem(props) {
+  return (
+    <a href="#" className="menu-item">
+      <span className="icon-button">{props.leftIcon}</span>
+      {props.children}
+      <span className="icon-right">{props.rightIcon}</span>
+    </a>
+  );
+}
+
+export { DropdownMenu, DropdownItem };
+

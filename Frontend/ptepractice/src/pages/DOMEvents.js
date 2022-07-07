@@ -46,7 +46,7 @@ function TwoWayBinding() {
 
   console.log(name);
 
-  return (
+  return (false &&
     <React.Fragment>
       <input 
         className="border-black border-[2px]"
