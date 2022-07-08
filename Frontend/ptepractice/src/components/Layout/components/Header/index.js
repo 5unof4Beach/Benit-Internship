@@ -47,13 +47,16 @@ function Header() {
                         justify-between
                     "
                 >
-                    <Item title="item 1">item 1</Item>
-                    <Item title="item 2">item 2</Item>
-                    <Item title="item 3">item 3</Item>
-                    <Item title="item 4" link='/news'>item 4</Item>
-                    <Item title="item 7" link='/news'>item 4</Item>
+                    <Item title="item 1">Home</Item>
+                    <Item title="item 2">Ebook</Item>
+                    <Item title="item 3">Online Training Course</Item>
+                    <Item title="item 4" link='/news'>Video Courses</Item>
+                    <Item title="item 7" link='/news'>Sample Questions</Item>
+                    <Item title="item 7" link='/news'>Blog</Item>
                     {!loggedIn ? 
-                        <Item title="Sign In" link='/signin'>Sign In</Item>:<Item title="Sign Out" link='/signout'>Sign Out</Item>
+                        <Item title="Sign In" link='/signin'>Sign In</Item>
+                        :
+                        <Item title="Sign Out" link='/signout'>{localStorage.getItem('userName')}</Item>
                     }
                 </div>
             </div>

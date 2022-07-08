@@ -6,8 +6,10 @@ function Signout() {
   const{loggedIn, setLoggedIn} = React.useContext(LoginContext)
   let navigate = useNavigate()
 
-  const handleSignOut = (state)=> {
-    setLoggedIn(state)
+  const handleSignOut = ()=> {
+    setLoggedIn(!loggedIn)
+    localStorage.removeItem('userName')
+    localStorage.removeItem('accessToken')
     navigate('/')
   }
 
@@ -17,7 +19,7 @@ function Signout() {
           className="
             border-[2px]
           "
-          onClick={() => handleSignOut(false)}
+          onClick={() => handleSignOut()}
         >
           Sign Out
         </button>

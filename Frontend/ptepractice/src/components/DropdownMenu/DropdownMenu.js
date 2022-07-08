@@ -1,9 +1,11 @@
 import "./style.css";
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import SidebarButton from "../Layout/DefaultLayout/Sidebar/Component/SidebarButton";
-import { ReactComponent as Practice} from "../../icons/practice.svg"
-import { ReactComponent as Arrow} from "../../icons/downArrow.svg"
+import { ReactComponent as Practice} from "../../icons/practiceWhite.svg"
+import { ReactComponent as Arrow} from "../../icons/caret.svg"
+import { ReactComponent as ArrowRev} from "../../icons/caret-reverse.svg"
 
 function DropdownMenu(props) {
   const [selected, setSelected] = useState(true);
@@ -27,13 +29,9 @@ function DropdownMenu(props) {
       style={{ height: menuHeight }}
       ref={dropdownRef}
       className="
-            dropdown
-            relative
-            w-[100%]
-            bg-transparent
-            rounded-[8px]
-            overflow-hidden
-            transition-opacity
+            dropdown relative
+            w-[100%] rounded-[8px]
+            bg-transparent overflow-hidden transition-opacity
         "
     >
       <CSSTransition
@@ -43,7 +41,7 @@ function DropdownMenu(props) {
         onEnter={(el) => calcHeight(el)}
       >
         <div className="menu" onClick={() => setSelected(!selected)}>
-          <SidebarButton leftIcon={<Practice />} rightIcon={<Arrow/>}>Practice</SidebarButton>
+          <ParentNode leftIcon={<Practice />} arrow={selected}>Practice</ParentNode>
         </div>
       </CSSTransition>
 
@@ -73,6 +71,25 @@ function DropdownItem(props) {
       
     </a>
   );
+}
+
+function ParentNode(props) {
+  const Arrows = {
+    true: <Arrow/>,
+    false: <ArrowRev/>
+  }
+  return (
+      <Link to="#" className="menu-item items-center p-[10px]">
+        <span className="icon-button">{props.leftIcon}</span>
+        {props.children}
+        <span className="
+            h-[20px] w-[20px] m-[2px] ml-[50px] p-[5px] 
+            flex justify-center items-center
+            
+          "
+        >{Arrows[props.arrow]}</span>
+      </Link>
+    );
 }
 
 

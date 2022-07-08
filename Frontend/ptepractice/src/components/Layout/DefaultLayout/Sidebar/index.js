@@ -3,9 +3,13 @@ import {
   DropdownItem,
 } from "../../../DropdownMenu/DropdownMenu.js";
 import SidebarButton from "./Component/SidebarButton/index.js";
-import Item from "../../components/Header/components/items/index.js";
 import { useState } from "react";
 import { ReactComponent as BoltIcon } from "../../../../icons/bolt.svg";
+import { ReactComponent as DashboardIcon } from "../../../../icons/dashboard.svg";
+import { ReactComponent as ProfileIcon } from "../../../../icons/myProfile.svg";
+import { ReactComponent as MockTestIcon } from "../../../../icons/mockTest.svg";
+import { ReactComponent as ShopIcon } from "../../../../icons/magicShop.svg";
+import { ReactComponent as DeviceIcon } from "../../../../icons/deviceTest.svg";
 
 function Sidebar() {
   const [open, setOpen] = useState(false);
@@ -13,20 +17,14 @@ function Sidebar() {
   return (
     <div
       className="
-                w-[256px]
-                h-[900px]
-                p-[10px]
-                flex
-                flex-col
-                items-center
+                w-[256px] h-[80%] p-[10px] mt-[30px] rounded-[10px]
+                flex flex-col items-center
                 bg-[#EEEE]
-                mt-[30px]
-                rounded-[10px]
             "
     >
 
-      <SidebarButton leftIcon={<BoltIcon />}>Dashboard</SidebarButton>
-      <SidebarButton leftIcon={<BoltIcon />}>My Profile</SidebarButton>
+      <SidebarButton leftIcon={<DashboardIcon />}>Dashboard</SidebarButton>
+      <SidebarButton leftIcon={<ProfileIcon />}>My Profile</SidebarButton>
 
         <DropdownMenu
         >
@@ -37,8 +35,9 @@ function Sidebar() {
           <DropdownItem leftIcon={<BoltIcon />}>Awesome!</DropdownItem>
         </DropdownMenu>
 
-      <SidebarButton leftIcon={<BoltIcon />}>Dashboard</SidebarButton>
-      <SidebarButton leftIcon={<BoltIcon />}>My Profile</SidebarButton>
+      <SidebarButton leftIcon={<MockTestIcon />}>Mock Test</SidebarButton>
+      <SidebarButton leftIcon={<ShopIcon />}>Magic Shop</SidebarButton>
+      <SidebarButton leftIcon={<DeviceIcon />}>Device Test</SidebarButton>
     </div>
   );
 }
