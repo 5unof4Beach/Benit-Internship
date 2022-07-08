@@ -8,8 +8,10 @@ function Signout() {
 
   const handleSignOut = ()=> {
     setLoggedIn(!loggedIn)
-    localStorage.removeItem('userName')
-    localStorage.removeItem('accessToken')
+    // localStorage.removeItem('userName')
+    // localStorage.removeItem('accessToken')
+    // localStorage.setItem("loggedIn", false)
+    localStorage.clear()
     navigate('/')
   }
 

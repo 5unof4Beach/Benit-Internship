@@ -1,12 +1,18 @@
-import React from "react"
+import React, {useRef, useState, useContext, useEffect} from "react"
 import {useNavigate} from 'react-router-dom'
 import { LoginContext } from "../../Helper/Context"
 
 function Signin() {
+    const userRef = useRef()
+    const [userName, setUserName] = useState('')
+    const [password, setPassword] = useState('')
+    const{loggedIn, setLoggedIn} = useContext(LoginContext)
 
-    const [userName, setUserName] = React.useState('')
-    const [password, setPassword] = React.useState('')
-    const{loggedIn, setLoggedIn} = React.useContext(LoginContext)
+    useEffect(() => {
+      userRef.current.focus()
+    }, [])
+
+
     let navigate = useNavigate()
 
     const handleLoggedIn = (state)=> {
@@ -37,6 +43,8 @@ function Signin() {
             console.log(res)
             localStorage.setItem("accessToken", res.accessToken)
             localStorage.setItem("userName", res.userName)
+            localStorage.setItem("loggedIn", true)
+            
             handleLoggedIn(!loggedIn)
             navigate('/')
         })
@@ -58,6 +66,7 @@ function Signin() {
     >
       <h1>Sign In Page</h1>
       <input
+        ref={userRef}
         placeholder="Username"
         className="
                     h-[30px]

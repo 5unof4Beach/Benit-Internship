@@ -35,7 +35,7 @@ function Sidebar() {
           <DropdownItem leftIcon={<BoltIcon />}>Awesome!</DropdownItem>
         </DropdownMenu>
 
-      <SidebarButton leftIcon={<MockTestIcon />}>Mock Test</SidebarButton>
+      {/* <SidebarButton leftIcon={<MockTestIcon />}>Mock Test</SidebarButton> */}
       <SidebarButton leftIcon={<ShopIcon />}>Magic Shop</SidebarButton>
       <SidebarButton leftIcon={<DeviceIcon />}>Device Test</SidebarButton>
     </div>

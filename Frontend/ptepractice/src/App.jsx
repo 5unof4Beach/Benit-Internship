@@ -1,6 +1,5 @@
 import React from "react";
 import { Routes, Route, Link, Router } from "react-router-dom";
-import { Gift } from "./pages/RandomGift";
 import {
   ToDoList,
   TwoWayBinding,
@@ -8,7 +7,7 @@ import {
   TwoWayBindingCheckBox,
   FirstUseEffect,
   RealtimeTitle,
-} from "./pages/DOMEvents";
+} from "./pages/Extras/DOMEvents";
 
 import { LoginContext } from "./Helper/Context";
 
@@ -17,7 +16,7 @@ import { DefaultLayout } from "./components/Layout";
 import { privateRoutes, publicRoutes } from "./routes/index.js";
 
 function App() {
-  const [loggedIn, setLoggedIn ] = React.useState(false);
+  const [loggedIn, setLoggedIn ] = React.useState((localStorage.getItem('loggedIn')===null)?false:localStorage.getItem('loggedIn'));
 
   return (
     <div className="app">

@@ -7,7 +7,7 @@ import {
     TwoWayBinding,
     FirstUseEffect,
     RealtimeTitle
-  } from "../pages/DOMEvents";
+  } from "../pages/Extras/DOMEvents";
 
 import Signin from "../pages/Signin";
 import Signout from "../pages/Signout";
