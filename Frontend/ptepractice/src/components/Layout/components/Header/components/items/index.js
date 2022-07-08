@@ -1,46 +1,34 @@
 import { Routes, Route, Link } from "react-router-dom";
 import { useState } from "react";
 
-function Item({className,children,title,...props}) {
+function Item({ className, children, title, ...props }) {
+  const [open, setOpen] = useState(false);
 
-    const [open, setOpen] = useState(false)
-
-    let defaultClassNames = `
-            w-[100%]
+  let defaultClassNames = `
             border-[2px]
             border-black
             text-black
             m-[5px]
             flex
+            grow-[1]
             justify-center
-        `
+        `;
 
-    let link = '#'
+  let link = "#";
 
-    if(props.link){
-        link = props.link
-    }
+  if (props.link) {
+    link = props.link;
+  }
 
-    if(className){
-        defaultClassNames = className
-    }
+  if (className) {
+    defaultClassNames = className;
+  }
 
-    return (  
-        <div
-            className={defaultClassNames}
-        >
-            <Link
-                className={className}
-                to={link}
-                onClick={() => setOpen(!open)}
-            >
-                {title}
-            </Link>
-            
-            {open && children}
-
-        </div>
-    );
+  return (
+    <Link className={defaultClassNames} to={link} onClick={() => setOpen(!open)}>
+      {children}
+    </Link>
+  );
 }
 
 export default Item;

@@ -5,7 +5,8 @@ function Logo({className}) {
             className={className}
         >
             <Pte className='
-                w-[120px]
+                w-[100%]
+                h-[100%]
             '/>
         </span>
 

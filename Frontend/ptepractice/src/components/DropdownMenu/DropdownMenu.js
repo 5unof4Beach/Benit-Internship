@@ -1,7 +1,9 @@
+import "./style.css";
 import React, { useState, useEffect, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
-import styled from "styled-components";
-import './style.css'
+import SidebarButton from "../Layout/DefaultLayout/Sidebar/Component/SidebarButton";
+import { ReactComponent as Practice} from "../../icons/practice.svg"
+import { ReactComponent as Arrow} from "../../icons/downArrow.svg"
 
 function DropdownMenu(props) {
   const [selected, setSelected] = useState(true);
@@ -9,12 +11,15 @@ function DropdownMenu(props) {
   const dropdownRef = useRef(null);
 
   useEffect(() => {
-    setMenuHeight(dropdownRef.current.lastChild.offsetHeight + 20);
+    let firstChild = dropdownRef.current.firstChild
+    console.log(firstChild)
+    let height = firstChild.offsetHeight 
+    setMenuHeight(height);
   }, []);
 
   function calcHeight(el) {
-    const height = el.offsetHeight;
-    setMenuHeight(height + 20);
+    const height = el.offsetHeight 
+    setMenuHeight(height );
   }
 
   return (
@@ -27,7 +32,6 @@ function DropdownMenu(props) {
             w-[100%]
             bg-transparent
             rounded-[8px]
-            p-[1rem]
             overflow-hidden
             transition-opacity
         "
@@ -36,11 +40,10 @@ function DropdownMenu(props) {
         in={selected}
         timeout={500}
         classNames="menu-primary"
-        // unmountOnExit
         onEnter={(el) => calcHeight(el)}
       >
         <div className="menu" onClick={() => setSelected(!selected)}>
-          {props.parentNode}
+          <SidebarButton leftIcon={<Practice />} rightIcon={<Arrow/>}>Practice</SidebarButton>
         </div>
       </CSSTransition>
 
@@ -59,15 +62,18 @@ function DropdownMenu(props) {
 
 function DropdownItem(props) {
   return (
-    <a href="#" 
-      className="menu-item justify-around items-center"
-    >
-      <span className="icon-button">{props.leftIcon}</span>
-      <span className="icon-right">{props.rightIcon}</span>
-      {props.children}
+    <a href="#" className="menu-item justify-end items-center">
+      <span className="
+        icon-button
+        w-[70%]
+        ">
+        {props.leftIcon}
+        {props.children}
+      </span>
+      
     </a>
   );
 }
 
-export { DropdownMenu, DropdownItem };
 
+export { DropdownMenu, DropdownItem };

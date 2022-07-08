@@ -1,19 +1,12 @@
-body {
-    margin: 0;
-    background: #151616;
-    font-family: roboto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
 * {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
+    font-weight: bold;
 }
 
 
 :root {
-    --bg: #242526;
+    /* --bg: #242526; */
     --bg-accent: #484a4d;
     --text-color: #38325D;
     --nav-size: 60px;
@@ -49,16 +42,13 @@ body {
 
 /* Icon Button */
 .icon-button {
-    --button-size: calc(var(--nav-size) * 0.5);
-    width: var(--button-size);
-    height: var(--button-size);
-    background-color: #FECC65;
-    border-radius: 50%;
+    /* background-color: #FECC65; */
+    border-radius: 8px;
     padding: 5px;
     margin: 2px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     transition: filter 300ms;
 }
 
@@ -82,14 +72,17 @@ body {
 
 .menu {
     width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
 }
 
 .menu-item {
     height: 50px;
+    width: 90%;
     display: flex;
     border-radius: var(--border-radius);
     transition: background var(--speed);
-    padding: 0.5rem;
     color: black;
 }
 

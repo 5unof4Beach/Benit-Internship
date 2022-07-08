@@ -35,7 +35,7 @@ function Header() {
             >
                 <Logo
                     className="
-                        grow-[1]
+                        w-[10%]
                     "
                 >
 
@@ -43,7 +43,6 @@ function Header() {
                 <div
                     className="
                         action
-                        grow-[5]
                         flex
                         justify-between
                     "
@@ -52,7 +51,10 @@ function Header() {
                     <Item title="item 2">item 2</Item>
                     <Item title="item 3">item 3</Item>
                     <Item title="item 4" link='/news'>item 4</Item>
-                    {!loggedIn ? <Item title="Sign In" link='/signin'>Sign In</Item>:<Item title="Sign Out" link='/signout'>Sign Out</Item>}
+                    <Item title="item 7" link='/news'>item 4</Item>
+                    {!loggedIn ? 
+                        <Item title="Sign In" link='/signin'>Sign In</Item>:<Item title="Sign Out" link='/signout'>Sign Out</Item>
+                    }
                 </div>
             </div>
         </header>
