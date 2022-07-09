@@ -11,7 +11,7 @@ import {
 
 import { LoginContext } from "./Helper/Context";
 
-import { DefaultLayout } from "./components/Layout";
+import DefaultLayout from "./components/Layout/DefaultLayout";
 
 import { privateRoutes, publicRoutes } from "./routes/index.js";
 
