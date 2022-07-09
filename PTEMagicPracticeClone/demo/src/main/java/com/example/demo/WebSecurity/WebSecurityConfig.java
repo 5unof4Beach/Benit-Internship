@@ -67,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.authorizeRequests()
-                .antMatchers("/jwt/login","/jwt/signup").permitAll()
+                .antMatchers("/jwt/login","/jwt/signup","jwt/login-google").permitAll()
                 .antMatchers("/jwt/fake", "/jwt/admin").authenticated();
 
         http.authorizeRequests().antMatchers("/jwt/admin").access("hasRole('ROLE_ADMIN')");

@@ -16,7 +16,7 @@ import { DefaultLayout } from "./components/Layout";
 import { privateRoutes, publicRoutes } from "./routes/index.js";
 
 function App() {
-  const [loggedIn, setLoggedIn ] = React.useState((localStorage.getItem('loggedIn')===null)?false:localStorage.getItem('loggedIn'));
+  const [loggedIn, setLoggedIn ] = React.useState(localStorage.getItem('loggedIn')??false);
 
   return (
     <div className="app">

@@ -8,8 +8,4 @@ import javax.validation.constraints.NotBlank;
 public class Code {
     @NotBlank
     private String code;
-
-    public Code(String code){
-        this.code = code;
-    }
 }

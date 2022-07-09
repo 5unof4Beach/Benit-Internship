@@ -3,6 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../Helper/Context";
 
 function Signin() {
+  const redirect_uri = "http://localhost:3000/signin/googlesignin";
+  // const redirect_uri = 'http://localhost:8080/jwt/googlelogin'
+
+  const client_id =
+    "719615345009-621atcuvo67cn1llc7ip9753dr11tts0.apps.googleusercontent.com";
+
   const userRef = useRef();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -14,31 +20,15 @@ function Signin() {
 
   let navigate = useNavigate();
 
+  var details = {
+    userName: "test@gmail.com",
+    password: "Password!",
+    grant_type: "password",
+  };
+
   const handleLoggedIn = (state) => {
     setLoggedIn(state);
   };
-
-  const handleGoogleSignin = () => {
-    const params = new Proxy(new URLSearchParams(window.location.search), {
-      get: (searchParams, prop) => searchParams.get(prop),
-    });
-    // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-    let code = params?.code;
-    console.log(code)
-    let options = {
-      method: "GET",
-      // headers: {
-      //   "Content-Type": "application/json",
-      // },
-    };
-
-    fetch(`http://localhost:8080/login-google?code=${code}`,options)
-      .then((res) => {
-        console.log(res)
-      })
-  }
-
-  // handleGoogleSignin()
 
   const handleSignIn = () => {
     let options = {
@@ -122,8 +112,8 @@ function Signin() {
             border-black 
             border-[2px]
         "
-        href="https://accounts.google.com/o/oauth2/auth?scope=email profile openid&openid.realm&include_granted_scopes=true&client_id=744486347000-kb2d1is3v69drqg14brhinkes80c83sf.apps.googleusercontent.com&redirect_uri=http://localhost:3000/signin&response_type=code
-        		&approval_prompt=force"
+        href={`https://accounts.google.com/o/oauth2/auth?scope=email profile openid&openid.realm&include_granted_scopes=true&client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=code
+        		&approval_prompt=force `}
       >
         Signin With Google
       </a>

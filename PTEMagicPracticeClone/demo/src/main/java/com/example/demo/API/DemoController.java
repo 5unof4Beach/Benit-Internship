@@ -67,26 +67,54 @@ public class DemoController {
         return new FakeMessage("Admin mới có thể thấy được message này");
     }
 
-    @GetMapping("/login-google")
+    @PostMapping("/googlelogin1")
     // màn hình đăng nhập tài khoản sau khi chọn tài khoản sẽ trả về request chứa code đến endpoint này
-    public FakeMessage loginGoogle(@Valid @RequestBody Code gcode) throws IOException {
-        String code = gcode.getCode();
+    public FakeMessage loginGoogle(@Valid @RequestBody Code code) throws IOException {
+        String gcode = code.getCode();
 
-        if (code == null || code.isEmpty()) {
+        if (gcode == null || gcode.isEmpty()) {
             return new FakeMessage("No Code");
         }
 
-        String accessToken = googleUtils.getToken(code);
-        System.out.println("code: " + code);
+        String accessToken = null;
+
+        try{
+            accessToken = googleUtils.getToken(gcode);
+        }
+        catch (Exception e){
+            return new FakeMessage("Cannot Retrieve Token With Code:" + gcode);
+        }
+        System.out.println("code: " + gcode);
         System.out.println("token: " + accessToken);
 
         GooglePojo googlePojo = googleUtils.getUserInfo(accessToken);
         UserDetails userDetail = googleUtils.buildUser(googlePojo);
 
-//        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetail, null,
-//                userDetail.getAuthorities());
-//        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
+        return new FakeMessage(accessToken);
+    }
+
+    @GetMapping("/googlelogin")
+    public FakeMessage loginGoogle2(HttpServletRequest request) throws IOException {
+        String gcode = request.getParameter("code");
+
+        if (gcode == null || gcode.isEmpty()) {
+            return new FakeMessage("No Code");
+        }
+
+        String accessToken = null;
+
+        try{
+            accessToken = googleUtils.getToken(gcode);
+        }
+        catch (Exception e){
+            return new FakeMessage("Cannot Retrieve Token With Code:" + gcode);
+        }
+        System.out.println("code: " + gcode);
+        System.out.println("token: " + accessToken);
+
+        GooglePojo googlePojo = googleUtils.getUserInfo(accessToken);
+        UserDetails userDetail = googleUtils.buildUser(googlePojo);
+
 
         return new FakeMessage(accessToken);
     }

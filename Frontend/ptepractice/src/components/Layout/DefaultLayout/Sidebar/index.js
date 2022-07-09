@@ -12,12 +12,11 @@ import { ReactComponent as ShopIcon } from "../../../../icons/magicShop.svg";
 import { ReactComponent as DeviceIcon } from "../../../../icons/deviceTest.svg";
 
 function Sidebar() {
-  const [open, setOpen] = useState(false);
 
   return (
     <div
       className="
-                w-[256px] h-[80%] p-[10px] mt-[30px] rounded-[10px]
+                grow-[1] h-[80%] p-[10px] rounded-[10px]
                 flex flex-col items-center
                 bg-[#EEEE]
             "
@@ -30,7 +29,7 @@ function Sidebar() {
         >
           <DropdownItem leftIcon={<BoltIcon />}>Speaking</DropdownItem>
           <DropdownItem leftIcon={<BoltIcon />}>Writing</DropdownItem>
-          <DropdownItem leftIcon={<BoltIcon />}>Reading</DropdownItem>
+          <DropdownItem leftIcon={<BoltIcon />} href='/reading'>Reading</DropdownItem>
           <DropdownItem leftIcon={<BoltIcon />}>Listening</DropdownItem>
           <DropdownItem leftIcon={<BoltIcon />}>Awesome!</DropdownItem>
         </DropdownMenu>

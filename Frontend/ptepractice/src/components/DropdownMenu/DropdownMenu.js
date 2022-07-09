@@ -60,7 +60,9 @@ function DropdownMenu(props) {
 
 function DropdownItem(props) {
   return (
-    <a href="#" className="menu-item justify-end items-center">
+    <Link to={props.href??'/'} 
+      className="menu-item justify-end items-center"
+    >
       <span className="
         icon-button
         w-[70%]
@@ -69,7 +71,7 @@ function DropdownItem(props) {
         {props.children}
       </span>
       
-    </a>
+    </Link>
   );
 }
 
