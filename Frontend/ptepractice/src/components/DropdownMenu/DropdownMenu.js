@@ -82,7 +82,7 @@ function ParentNode(props) {
         <span className="icon-button">{props.leftIcon}</span>
         {props.children}
         <span className="
-            h-[20px] w-[20px] m-[2px] ml-[50px] p-[5px] 
+            h-[20px] w-[20px] m-[2px] p-[5px] 
             flex justify-center items-center
             
           "

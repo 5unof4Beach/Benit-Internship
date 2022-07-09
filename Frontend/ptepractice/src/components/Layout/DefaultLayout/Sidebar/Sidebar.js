@@ -10,7 +10,7 @@ function Sidebar() {
   return (
     <div
       className="
-                grow-[1] h-[80%] p-[10px] rounded-[10px]
+                w-[250px] h-[80%] p-[10px] rounded-[10px]
                 flex flex-col items-center
                 bg-[#EEEE]
             "

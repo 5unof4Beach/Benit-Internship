@@ -22,8 +22,8 @@ function DefaultLayout({children}) {
                 <Sidebar></Sidebar>
                 <div
                     className="
-                        h-[80%] ml-[10px] rounded-[8px]
-                        flex  justify-center items-center grow-[20]
+                        min-h-[80%] ml-[10px] rounded-[8px]
+                        flex  justify-center items-center grow
                         bg-[#EEEE]
                     "
                 >
