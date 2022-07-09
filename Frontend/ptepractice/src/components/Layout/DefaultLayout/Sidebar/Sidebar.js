@@ -4,13 +4,17 @@ import {
 } from "../../../DropdownMenu/DropdownMenu.js";
 import SidebarButton from "./Component/SidebarButton/SidebarButton.js";
 import { BoltIcon, DashboardIcon, ProfileIcon, ShopIcon, DeviceIcon } from "../../../../icons/Icons/Icons.js";
+import Reading from "../../../../pages/Reading/Reading.js";
+import { useContext } from "react";
+import { SidebarSelection } from "../../../../Helper/Context.js";
 
 function Sidebar() {
+  const {setCom} = useContext(SidebarSelection)
 
   return (
     <div
       className="
-                w-[250px] h-[80%] p-[10px] rounded-[10px]
+                w-[15%] min-w-[250px] h-[80%] p-[10px] rounded-[10px]
                 flex flex-col items-center
                 bg-[#EEEE]
             "
@@ -21,10 +25,10 @@ function Sidebar() {
 
         <DropdownMenu
         >
-          <DropdownItem leftIcon={<BoltIcon />}>Speaking</DropdownItem>
-          <DropdownItem leftIcon={<BoltIcon />}>Writing</DropdownItem>
-          <DropdownItem leftIcon={<BoltIcon />} href='/reading'>Reading</DropdownItem>
-          <DropdownItem leftIcon={<BoltIcon />}>Listening</DropdownItem>
+          <DropdownItem  leftIcon={<BoltIcon />}>Writing</DropdownItem>
+          <DropdownItem  leftIcon={<BoltIcon />}>Speaking</DropdownItem>
+          <DropdownItem  leftIcon={<BoltIcon />} href='/reading'>Reading</DropdownItem>
+          <DropdownItem  leftIcon={<BoltIcon />}>Listening</DropdownItem>
           <DropdownItem leftIcon={<BoltIcon />}>Awesome!</DropdownItem>
         </DropdownMenu>
 

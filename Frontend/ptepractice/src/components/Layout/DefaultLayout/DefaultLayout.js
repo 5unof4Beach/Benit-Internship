@@ -1,36 +1,44 @@
 import React from "react";
 import Header from "../components/Header";
 import Sidebar from "./Sidebar";
+import { useState } from "react";
+import { SidebarSelection } from "../../../Helper/Context";
+import Reading from "../../../pages/Reading";
 
 function DefaultLayout({children}) {
-    return ( 
-        <div
-            className="
-                bg-[#F9F9F9] w-[100%]
-                flex flex-col items-center
-            "
-        >
-            <Header></Header>
+    const [loggedIn, setLoggedIn] = useState('practice');
+    const [selectedComponent, setSelectedComponent] = useState(<Reading></Reading>)
 
-            <div 
+    return (
+        <SidebarSelection.Provider value={{selectedComponent, setSelectedComponent}}>
+            <div
                 className="
-                    content
-                    bg-[#F9F9F9] h-[auto] w-[70%] mt-[30px]
-                    flex justify-start
-                "    
+                    bg-[#F9F9F9] w-[100%]
+                    flex flex-col items-center
+                "
             >
-                <Sidebar></Sidebar>
-                <div
+                <Header></Header>
+
+                <div 
                     className="
-                        h-[auto] ml-[10px] rounded-[8px]
-                        flex  justify-center items-center w-[70%] min-w-[650px]
-                        bg-[#EEEE]
-                    "
+                        content
+                        bg-[#F9F9F9] h-[auto] w-[70%] mt-[30px] mb-[30px]
+                        flex justify-start
+                    "    
                 >
-                    {children}
+                    <Sidebar></Sidebar>
+                    <div
+                        className="
+                            h-[auto] ml-[10px] rounded-[8px]
+                            flex  justify-center items-center grow
+                            bg-[#EEEE]
+                        "
+                    >
+                        {children}
+                    </div>
                 </div>
             </div>
-        </div>
+        </SidebarSelection.Provider> 
      );
 }
 

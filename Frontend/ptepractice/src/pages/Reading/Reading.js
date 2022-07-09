@@ -5,7 +5,7 @@ function Reading() {
   return (
     <div
       className="
-                w-[98%] h-[100%] border-[2px] border-black
+                w-[98%] h-[100%] 
                 flex flex-wrap
             "
     >
@@ -20,9 +20,8 @@ function Reading() {
 
       <div
         className="
-            border-[2px] border-blue-700
             mt-[10px] w-[100%] h-[auto]
-            flex flex-wrap
+            flex flex-wrap 
             "
       >
         <Introduction>PTE Reading is the second section of the test and will take approximately 30-40 minutes. The reading materials for this section are all authentic texts about a variety of academic subjects, including humanities, natural sciences and social sciences.</Introduction>
@@ -39,27 +38,27 @@ function Reading() {
 
         <SelectionCard
             name='READING'
-            title=''
+            title='PTE MAGIC MATERIALS'
         />
         <SelectionCard
             name='READING'
-            title=''
+            title='MC, choose single answer'
         />
         <SelectionCard
             name='READING'
-            title=''
+            title='Re-order paragraphs'
         />
         <SelectionCard
             name='READING'
-            title=''
+            title='R&W: Fill in the blanks [RWFIB]'
         />
         <SelectionCard
             name='READING'
-            title=''
+            title='MC, choose multiple answers'
         />
         <SelectionCard
             name='READING'
-            title=''
+            title='R: Fill in the blanks [RFIB]'
         />
       
         

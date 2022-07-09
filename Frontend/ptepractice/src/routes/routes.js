@@ -22,10 +22,10 @@ const publicRoutes = [
     {path: '/signin', component: Signin, layout:HeaderOnlyLayout},
     {path: '/signout', component: Signout, layout: HeaderOnlyLayout},
     {path: '/signin/googlesignin', component: GoogleSignin, layout: HeaderOnlyLayout},
-    {path: '/reading', component: Reading}
-]
-
-const privateRoutes = [
+  ]
+  
+  const privateRoutes = [
+  {path: '/reading', component: Reading}
 
 ]
 

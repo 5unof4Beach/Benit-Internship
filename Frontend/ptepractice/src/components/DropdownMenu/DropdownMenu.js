@@ -2,7 +2,10 @@ import "./style.css";
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
-import { Arrow, ArrowRev, Practice } from "../../icons/Icons/Icons";
+import SidebarButton from "../Layout/DefaultLayout/Sidebar/Component/SidebarButton";
+import { ReactComponent as Practice} from "../../icons/practiceWhite.svg"
+import { ReactComponent as Arrow} from "../../icons/caret.svg"
+import { ReactComponent as ArrowRev} from "../../icons/caret-reverse.svg"
 
 function DropdownMenu(props) {
   const [selected, setSelected] = useState(true);
@@ -82,7 +85,7 @@ function ParentNode(props) {
         <span className="icon-button">{props.leftIcon}</span>
         {props.children}
         <span className="
-            h-[20px] w-[20px] m-[2px] p-[5px] 
+            h-[20px] w-[20px] m-[2px] ml-[50px] p-[5px] 
             flex justify-center items-center
             
           "
