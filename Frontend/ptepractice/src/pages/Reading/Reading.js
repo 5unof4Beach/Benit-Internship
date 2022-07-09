@@ -5,7 +5,8 @@ function Reading() {
   return (
     <div
       className="
-                w-[98%] h-[98%] border-[2px] border-black
+                w-[98%] h-[100%] border-[2px] border-black
+                flex flex-wrap
             "
     >
       <header
@@ -20,7 +21,7 @@ function Reading() {
       <div
         className="
             border-[2px] border-blue-700
-            mt-[10px] h-[90%]
+            mt-[10px] w-[100%] h-[auto]
             flex flex-wrap
             "
       >
@@ -36,10 +37,32 @@ function Reading() {
             </ul>
         </Introduction>
 
-        <SelectionCard></SelectionCard>
-        <SelectionCard></SelectionCard>
-        <SelectionCard></SelectionCard>
-        <SelectionCard></SelectionCard>
+        <SelectionCard
+            name='READING'
+            title=''
+        />
+        <SelectionCard
+            name='READING'
+            title=''
+        />
+        <SelectionCard
+            name='READING'
+            title=''
+        />
+        <SelectionCard
+            name='READING'
+            title=''
+        />
+        <SelectionCard
+            name='READING'
+            title=''
+        />
+        <SelectionCard
+            name='READING'
+            title=''
+        />
+      
+        
       </div>
     </div>
   );

@@ -15,15 +15,15 @@ function DefaultLayout({children}) {
             <div 
                 className="
                     content
-                    bg-[#F9F9F9] h-[1000px] w-[70%] mt-[30px]
+                    bg-[#F9F9F9] h-[auto] w-[70%] mt-[30px]
                     flex justify-start
                 "    
             >
                 <Sidebar></Sidebar>
                 <div
                     className="
-                        min-h-[80%] ml-[10px] rounded-[8px]
-                        flex  justify-center items-center grow
+                        h-[auto] ml-[10px] rounded-[8px]
+                        flex  justify-center items-center w-[70%] min-w-[650px]
                         bg-[#EEEE]
                     "
                 >
