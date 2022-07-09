@@ -1,5 +1,6 @@
 package com.example.demo.API;
 
+import com.example.demo.Payload.FakeMessage;
 import com.example.demo.common.GooglePojo;
 import com.example.demo.common.GoogleUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +9,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Controller
+@CrossOrigin
 public class BaseController {
 	
 	@Autowired
@@ -24,13 +28,13 @@ public class BaseController {
 		return "login";
 	}
 
-	@RequestMapping("/login-google")
+	@GetMapping("/login-google")
 	// màn hình đăng nhập tài khoản sau khi chọn tài khoản sẽ trả về request chứa code đến endpoint này
-	public String loginGoogle(HttpServletRequest request) throws IOException {
+	public FakeMessage loginGoogle(HttpServletRequest request) throws IOException {
 		String code = request.getParameter("code");
 		
 		if (code == null || code.isEmpty()) {
-			return "redirect:/login?google=error";
+			return new FakeMessage("No Code");
 		}
 
 		String accessToken = googleUtils.getToken(code);
@@ -44,7 +48,7 @@ public class BaseController {
 				userDetail.getAuthorities());
 		authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-		return "redirect:/user";
+		return new FakeMessage(accessToken);
 	}
 
 	@RequestMapping("/user")
