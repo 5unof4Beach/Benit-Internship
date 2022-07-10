@@ -64,13 +64,8 @@ function TwoWayBinding() {
   );
 }
 
-function TwoWayBindingRadio() {
-  const data = [
-    'Differing opinions on slavery contributed to the Civil War.',
-    'The North expected and demanded Civil War.',
-    'The radical southern states instigated the Civil War.',
-    'Disputes between political parties had little effect on the Civil War.'
-  ];
+function TwoWayBindingRadio({children, ...props}) {
+  const data = children
 
   const [choice, setChoice] = React.useState();
 

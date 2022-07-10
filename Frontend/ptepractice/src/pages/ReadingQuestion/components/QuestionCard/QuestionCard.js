@@ -1,6 +1,6 @@
 import { TwoWayBindingRadio } from "../../../Extras/DOMEvents";
 
-function QuestionCard({data, ...props}) {
+function QuestionCard({data, children,...props}) {
   return (
     <div
         className="flex flex-col items-center mt-[10px]"
@@ -21,7 +21,7 @@ function QuestionCard({data, ...props}) {
                         flex items-center
                     "
         
-        >#1</p>
+        >#{children.index}</p>
         <p
           className="
                     font-semibold
@@ -40,7 +40,7 @@ function QuestionCard({data, ...props}) {
                     font-normal text-[18px]
                 "
       >
-        These resolutions, demanding in effect that slavery be thus safeguarded-almost to the extent of introducing it into the free states-really foreshadowed the Democratic platform of 1860 which led to the great split in that party, the victory of the Republicans under Lincoln, the subsequent secession of the more radical southern states, and finally the Civil War, for it was inevitable that the North, when once aroused, would bitterly resent such pro-slavery demands.
+        {children.paragraph}
       </p>
       <p
         className="
@@ -49,11 +49,11 @@ function QuestionCard({data, ...props}) {
                     font-semibold text-xl
                 "
       >
-        Which of the following best summarises the main message of this text?
+        {children.question}
       </p>
 
       <div className="w-[90%] ml-[10px] mt-[20px]">
-        <TwoWayBindingRadio></TwoWayBindingRadio>
+        <TwoWayBindingRadio>{children.answers}</TwoWayBindingRadio>
       </div>
     </div>
   );

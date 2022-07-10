@@ -15,10 +15,11 @@ import GoogleSignin from "../pages/Signin/GoogleSignin";
 import Signout from "../pages/Signout";
 import Reading from "../pages/Reading";
 import ReadingQuestionPage from "../pages/ReadingQuestion/ReadingQuestionPage";
+import Loading from "../components/Loading/Loading";
 
 
 const publicRoutes = [
-    {path: '/', component: TwoWayBindingRadio},
+    {path: '/', component: Loading},
     {path: '/news', component: FirstUseEffect},
     {path: '/contact', component: RealtimeTitle},
     {path: '/signin', component: Signin, layout:HeaderOnlyLayout},

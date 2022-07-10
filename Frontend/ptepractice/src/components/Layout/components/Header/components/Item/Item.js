@@ -6,25 +6,17 @@ function Item({ className, children, title, ...props }) {
 
   let defaultClassNames = `
             text-black truncate
-            h-[50px] ml-[15px] mr-[15px] pl-[10px] pr-[10px] rounded-[5px]
-            flex grow-[1] items-center
+            w-[auto] h-[50px] ml-[15px] mr-[15px] pl-[10px] pr-[10px] rounded-[5px]
+            flex items-center
             text-[15px] font-semibold
             hover:bg-[#a69e9d33]
             transition duration-[400ms]
         `;
 
-  let link = "#";
-
-  if (props.link) {
-    link = props.link;
-  }
-
-  if (className) {
-    defaultClassNames = className;
-  }
+  let defaultLink = "#";
 
   return (
-    <Link className={defaultClassNames} to={link} onClick={() => setOpen(!open)}>
+    <Link className={className??defaultClassNames} to={props.link??defaultLink} onClick={() => setOpen(!open)}>
       {children}
     </Link>
   );
