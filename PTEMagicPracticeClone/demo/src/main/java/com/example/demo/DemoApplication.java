@@ -45,16 +45,29 @@ public class DemoApplication implements CommandLineRunner {
 		Question q1 = new Question();
 		q1.setIndex(questionService.lastIndex() + 1);
 		q1.setParagraph("Policymakers must confront the dilemma that fossil fuels continue to be an indispensable source of energy even though burning them produces atmospheric accumulations of carbon dioxide that increase the likelihood of potentially disastrous global climate change. Currently, the technology that would capture carbon dioxide emitted by power plants and sequester it harmlessly underground or undersea instead of releasing it into the atmosphere might double the cost of generating electricity. But because sequestration does not affect the cost of electricity transmission and distribution, delivered prices will rise less, by no more than 50 percent. Research into better technologies for capturing carbon dioxide will undoubtedly lead to lowered costs.");
-		q1.setQuestion("The passage implies which of the following about the current cost of generating electricity?");
+		q1.setQuestion("Which of the following best summarises the main message of this text?");
 		List<String> ans = new ArrayList<>();
+		ans.add("Differing opinions on slavery contributed to the Civil War.");
+		ans.add("The North expected and demanded Civil War.");
+		ans.add("The radical southern states instigated the Civil War.");
+		ans.add("Disputes between political parties had little effect on the Civil War.");
+		q1.setAnswers(ans);
+		q1.setCorrect("1");
+		questionRepo.save(q1);
+
+		Question q2 = new Question();
+		q2.setIndex(questionService.lastIndex() + 1);
+		q2.setParagraph("Policymakers must confront the dilemma that fossil fuels continue to be an indispensable source of energy even though burning them produces atmospheric accumulations of carbon dioxide that increase the likelihood of potentially disastrous global climate change. Currently, the technology that would capture carbon dioxide emitted by power plants and sequester it harmlessly underground or undersea instead of releasing it into the atmosphere might double the cost of generating electricity. But because sequestration does not affect the cost of electricity transmission and distribution, delivered prices will rise less, by no more than 50 percent. Research into better technologies for capturing carbon dioxide will undoubtedly lead to lowered costs.");
+		q2.setQuestion("The passage implies which of the following about the current cost of generating electricity?");
+		List<String> ans2 = new ArrayList<>();
 		ans.add("It is higher than it would be if better technologies for capturing carbon dioxide were available.");
 		ans.add("It is somewhat less than the cost of electricity transmission and distribution.");
 		ans.add("It constitutes at most half of the delivered price of electricity.");
 		ans.add("It is dwelt on by policymakers to the exclusion of other costs associated with electricity delivery.");
 		ans.add("It is not fully recovered by the prices charged directly to electricity consumers.");
-		q1.setAnswers(ans);
-		q1.setCorrect("2");
-		questionRepo.save(q1);
+		q2.setAnswers(ans2);
+		q2.setCorrect("2");
+		questionRepo.save(q2);
 		System.out.println("Data creation complete...");
 	}
 	@Override
