@@ -3,18 +3,14 @@
 import {HeaderOnlyLayout} from "../components/Layout/";
 
 //Pages
-import {
-    TwoWayBinding,
-    FirstUseEffect,
-    RealtimeTitle,
-    TwoWayBindingRadio
-  } from "../pages/Extras/DOMEvents";
+import { FirstUseEffect, RealtimeTitle, } from "../pages/Extras/DOMEvents";
 
 import Signin from "../pages/Signin";
 import GoogleSignin from "../pages/Signin/GoogleSignin";
 import Signout from "../pages/Signout";
 import Reading from "../pages/Reading";
-import ReadingQuestionPage from "../pages/ReadingQuestion/ReadingQuestionPage";
+import ReadingQuestionPage from "../pages/Reading/ReadingQuestion/ReadingQuestionPage";
+import ReadingReorderPage from "../pages/Reading/ReadingReorder/ReadingReorderPage";
 import Loading from "../components/Loading/Loading";
 
 
@@ -29,8 +25,9 @@ const publicRoutes = [
   ]
   
   const privateRoutes = [
-  {path: '/question_bank', component: ReadingQuestionPage, layout:HeaderOnlyLayout}
-
+    {path: '/question_bank', component: ReadingQuestionPage, layout:HeaderOnlyLayout},
+    {path: '/question_reorder', component: ReadingReorderPage, layout:HeaderOnlyLayout}
+    
 ]
 
 export { publicRoutes, privateRoutes }

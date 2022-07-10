@@ -1,5 +1,4 @@
 import QuestionCard from "../QuestionCard/QuestionCard";
-import Button from "../../../../components/Button";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import { useState } from "react";
 

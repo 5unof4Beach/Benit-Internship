@@ -13,6 +13,7 @@ function Sidebar() {
 
   return (
     <div
+      onDragOver={(e) => this.onDragOver(e)}
       className="
                 w-[15%] min-w-[250px] h-[80%] p-[10px] rounded-[10px]
                 flex flex-col items-center

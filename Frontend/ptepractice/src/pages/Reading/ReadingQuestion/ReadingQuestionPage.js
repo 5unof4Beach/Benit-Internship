@@ -1,7 +1,7 @@
-import QuestionCard from "./components/QuestionCard/QuestionCard";
 import QuestionList from "./components/QuestionList/QuestionList";
+import QuestionCard from "./components/QuestionCard/QuestionCard";
 import { useState, useEffect } from "react";
-import Loading from "../../components/Loading/Loading";
+import Loading from "../../../components/Loading/Loading";
 
 function ReadingQuestionPage({props}) {
     const [isLoading, setIsLoading] = useState(true)

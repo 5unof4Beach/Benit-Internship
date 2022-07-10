@@ -46,6 +46,7 @@ function Reading() {
             title='MC, choose single answer'
         />
         <SelectionCard
+            href='/question_reorder'
             name='READING'
             title='Re-order paragraphs'
         />

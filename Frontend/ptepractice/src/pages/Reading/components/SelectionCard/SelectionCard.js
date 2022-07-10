@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 function SelectionCard(props) {
   return (
     <Link
+      draggable
       to={props.href??'/'}
       className="
                 relative 

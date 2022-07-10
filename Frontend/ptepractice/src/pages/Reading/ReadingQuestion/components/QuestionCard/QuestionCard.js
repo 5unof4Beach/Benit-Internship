@@ -1,4 +1,4 @@
-import { TwoWayBindingRadio } from "../../../Extras/DOMEvents";
+import { TwoWayBindingRadio } from "../../../../Extras/DOMEvents";
 import { useState, useEffect } from "react";
 
 function QuestionCard({data, children,...props}) {
