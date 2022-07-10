@@ -1,4 +1,4 @@
-package com.example.demo.Questions;
+package com.example.demo.Questions.Question;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,20 +8,36 @@ import java.util.List;
 @Document("questions")
 public class Question {
     @Id
-    private String id;
+    String id;
 
+    Long index;
     private String question;
     private List<String> answers;
     private String correct;
 
+    private Test testData = new Test();
+
+    public Test getTestData() {
+        return testData;
+    }
+
+
     public Question() {
     }
 
-    public Question(String id, String question, List<String> answers, String correct) {
-        this.id = id;
+    public Question(Long index, String question, List<String> answers, String correct) {
+        this.index = index;
         this.question = question;
         this.answers = answers;
         this.correct = correct;
+    }
+
+    public Long getIndex() {
+        return index;
+    }
+
+    public void setIndex(Long index) {
+        this.index = index;
     }
 
     public String getId() {
@@ -56,3 +72,4 @@ public class Question {
         this.correct = correct;
     }
 }
+

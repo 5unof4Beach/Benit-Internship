@@ -1,10 +1,10 @@
 package com.example.demo;
 
-import com.example.demo.Questions.Question;
+import com.example.demo.Questions.Question.Question;
 import com.example.demo.Questions.QuestionRepo;
+import com.example.demo.Questions.QuestionService;
 import com.example.demo.Role.Role;
 import com.example.demo.Role.RoleRepo;
-import com.example.demo.User.User;
 import com.example.demo.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -13,7 +13,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 @SpringBootApplication
@@ -28,19 +27,23 @@ public class DemoApplication implements CommandLineRunner {
 	UserRepository userRepository;
 
 	QuestionRepo questionRepo;
+
+	QuestionService questionService;
 	RoleRepo roleRepo;
 
 	@Autowired
-	public DemoApplication(QuestionRepo questionRepo, RoleRepo roleRepo,PasswordEncoder passwordEncoder, UserRepository userRepository) {
+	public DemoApplication(QuestionService questionService,QuestionRepo questionRepo, RoleRepo roleRepo,PasswordEncoder passwordEncoder, UserRepository userRepository) {
 		this.passwordEncoder = passwordEncoder;
 		this.userRepository = userRepository;
 		this.roleRepo = roleRepo;
 		this.questionRepo = questionRepo;
+		this.questionService = questionService;
 	}
 
 	public void createQuestion(){
 		System.out.println("Data creation started...");
 		Question q1 = new Question();
+		q1.setIndex(questionService.lastIndex() + 1);
 		q1.setQuestion("Mô hình tổng quát đảm bảo an toàn thông tin và hệ thống thông tin  thường gồm các lớp:");
 		List<String> ans = new ArrayList<>();
 		ans.add("An ninh tổ chức, An ninh mạng và Điều khiển truy cập");
