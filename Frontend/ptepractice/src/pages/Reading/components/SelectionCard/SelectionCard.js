@@ -1,6 +1,9 @@
+import { Link } from "react-router-dom";
+
 function SelectionCard(props) {
   return (
-    <div
+    <Link
+      to={props.href??'/'}
       className="
                 relative 
                 min-w-[300px] min-h-[300px]
@@ -29,7 +32,7 @@ function SelectionCard(props) {
             "
         >{props.title.toUpperCase()}</p>
       </div>
-    </div>
+    </Link>
   );
 }
 

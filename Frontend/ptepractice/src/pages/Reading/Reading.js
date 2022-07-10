@@ -41,6 +41,7 @@ function Reading() {
             title='PTE MAGIC MATERIALS'
         />
         <SelectionCard
+            href='/question_bank'
             name='READING'
             title='MC, choose single answer'
         />

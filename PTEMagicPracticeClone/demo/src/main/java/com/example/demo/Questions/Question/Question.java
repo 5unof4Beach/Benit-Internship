@@ -11,15 +11,14 @@ public class Question {
     String id;
 
     Long index;
+
+    private String paragraph;
     private String question;
     private List<String> answers;
     private String correct;
 
     private Test testData = new Test();
 
-    public Test getTestData() {
-        return testData;
-    }
 
 
     public Question() {
@@ -30,6 +29,18 @@ public class Question {
         this.question = question;
         this.answers = answers;
         this.correct = correct;
+    }
+
+    public String getParagraph() {
+        return paragraph;
+    }
+
+    public void setParagraph(String paragraph) {
+        this.paragraph = paragraph;
+    }
+
+    public void setTestData(Test testData) {
+        this.testData = testData;
     }
 
     public Long getIndex() {

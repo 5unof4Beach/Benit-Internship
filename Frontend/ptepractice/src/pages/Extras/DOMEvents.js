@@ -66,25 +66,13 @@ function TwoWayBinding() {
 
 function TwoWayBindingRadio() {
   const data = [
-    {
-      id: 1,
-      name: "html",
-    },
-    {
-      id: 2,
-      name: "Java",
-    },
-    {
-      id: 3,
-      name: "css",
-    },
-    {
-      id: 4,
-      name: "Spring Boot",
-    },
+    'Differing opinions on slavery contributed to the Civil War.',
+    'The North expected and demanded Civil War.',
+    'The radical southern states instigated the Civil War.',
+    'Disputes between political parties had little effect on the Civil War.'
   ];
 
-  const [choice, setChoice] = React.useState(3);
+  const [choice, setChoice] = React.useState();
 
   const handleChoice = (id) => {
     setChoice(id);
@@ -92,16 +80,19 @@ function TwoWayBindingRadio() {
 
   console.log(choice);
   return (
-    <div>
-      {data.map((course) => (
-        <div key={course.id}>
+    <div className="">
+      {data.map((answer, index) => (
+        <div key={index}>
           <input
-            id={course.name}
+            className="h-full"
+            id={index}
             type="radio"
-            checked={choice === course.id}
-            onChange={() => handleChoice(course.id)}
+            checked={choice === index}
+            onChange={() => handleChoice(index)}
           />
-          <label htmlFor={course.name}>{course.name}</label>
+          <label 
+            className="ml-[10px] font-normal text-[18px]"
+            htmlFor={index}>{answer}</label>
         </div>
       ))}
     </div>

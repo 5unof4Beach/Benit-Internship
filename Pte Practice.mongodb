@@ -1,0 +1,5 @@
+use('pte')
+
+db.singleAnswerQuestion.insertOne({question:'How does mongoDB Work'})
+db.singleAnswerQuestion.insertOne({question:'How does mongoDB Work'})
+db.singleAnswerQuestion.find()
