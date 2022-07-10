@@ -61,9 +61,9 @@ function TwoWayBindingRadio({children,correctAnswer, showAnswer, ...props}) {
     <div className="">
       {data.map((answer, index) => (
         <div key={index} className='flex'>
-          {showAnswer&&(index==correctAnswer?<ClearIcon/>:<CheckIcon/>)}
+          {showAnswer&&(index==correctAnswer?<CheckIcon/>:<ClearIcon/>)}
           <input
-            className="h-full"
+            className=""
             id={index}
             type="radio"
             checked={choice === index}

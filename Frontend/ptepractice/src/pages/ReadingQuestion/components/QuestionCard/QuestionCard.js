@@ -1,9 +1,13 @@
 import Button from "../../../../components/Button";
 import { TwoWayBindingRadio } from "../../../Extras/DOMEvents";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function QuestionCard({data, children,...props}) {
   const [showAnswer, setShowAnswer] = useState(false)
+
+  useEffect(()=>{
+    setShowAnswer(false)
+  }, [children.index])
 
   return (
     <div
