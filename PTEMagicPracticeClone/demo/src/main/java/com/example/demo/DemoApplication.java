@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.Questions.Question;
+import com.example.demo.Questions.QuestionRepo;
 import com.example.demo.Role.Role;
 import com.example.demo.Role.RoleRepo;
 import com.example.demo.User.User;
@@ -10,6 +12,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -23,15 +26,32 @@ public class DemoApplication implements CommandLineRunner {
 
 	PasswordEncoder passwordEncoder;
 	UserRepository userRepository;
+
+	QuestionRepo questionRepo;
 	RoleRepo roleRepo;
 
 	@Autowired
-	public DemoApplication(RoleRepo roleRepo,PasswordEncoder passwordEncoder, UserRepository userRepository) {
+	public DemoApplication(QuestionRepo questionRepo, RoleRepo roleRepo,PasswordEncoder passwordEncoder, UserRepository userRepository) {
 		this.passwordEncoder = passwordEncoder;
 		this.userRepository = userRepository;
 		this.roleRepo = roleRepo;
+		this.questionRepo = questionRepo;
 	}
 
+	public void createQuestion(){
+		System.out.println("Data creation started...");
+		Question q1 = new Question();
+		q1.setQuestion("Mô hình tổng quát đảm bảo an toàn thông tin và hệ thống thông tin  thường gồm các lớp:");
+		List<String> ans = new ArrayList<>();
+		ans.add("An ninh tổ chức, An ninh mạng và Điều khiển truy cập");
+		ans.add("An ninh tổ chức, An ninh mạng và Điều khiển truy cập");
+		ans.add("An ninh tổ chức, An ninh mạng và Điều khiển truy cập");
+		ans.add("An ninh tổ chức, An ninh mạng và Điều khiển truy cập");
+		q1.setAnswers(ans);
+		q1.setCorrect("1");
+		questionRepo.save(q1);
+		System.out.println("Data creation complete...");
+	}
 	@Override
 	public void run(String... args) throws Exception {
 		if (roleRepo.findByName("ROLE_ADMIN") == null) {
@@ -41,6 +61,8 @@ public class DemoApplication implements CommandLineRunner {
 		if (roleRepo.findByName("ROLE_MEMBER") == null) {
 			roleRepo.save(new Role("ROLE_MEMBER"));
 		}
+
+		createQuestion();
 
 
 //			User admin = new User();
