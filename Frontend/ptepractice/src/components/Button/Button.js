@@ -8,7 +8,7 @@ function Button({ className, children, title, ...props }) {
             text-black truncate
             w-[auto] h-[50px] ml-[15px] mr-[15px] pl-[10px] pr-[10px] rounded-[5px]
             flex items-center
-            text-[15px] font-semibold
+            text-[18px] font-semibold
             hover:bg-[#a69e9d33]
             transition duration-[400ms]
         `;

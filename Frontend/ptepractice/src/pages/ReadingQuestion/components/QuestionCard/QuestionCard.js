@@ -1,10 +1,13 @@
 import Button from "../../../../components/Button";
 import { TwoWayBindingRadio } from "../../../Extras/DOMEvents";
+import { useState } from "react";
 
 function QuestionCard({data, children,...props}) {
+  const [showAnswer, setShowAnswer] = useState(false)
+
   return (
     <div
-        className="flex flex-col items-center mt-[10px]"
+        className="flex flex-col items-center mt-[10px] h-[500px]"
     >
       <div
         className="
@@ -54,10 +57,17 @@ function QuestionCard({data, children,...props}) {
       </p>
 
       <div className="w-[90%] ml-[10px] mt-[20px]">
-        <TwoWayBindingRadio>{children.answers}</TwoWayBindingRadio>
+        <TwoWayBindingRadio
+           showAnswer={showAnswer}
+           correctAnswer={children.correct}
+        >
+          {children.answers}
+        </TwoWayBindingRadio>
       </div>
-      <div className=" flex justify-start">
-        <Button>Answer</Button>
+      <div className="w-[90%] flex justify-start">
+        <button
+          onClick={() => setShowAnswer(true)}
+        >Answer</button>
       </div>
     </div>
   );

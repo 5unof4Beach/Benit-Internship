@@ -23,7 +23,7 @@ function ReadingQuestionPage({props}) {
         <div
             className="
             
-                w-[70%] min-w-[700px]
+                w-[70%] min-w-[1000px]
                 flex justify-items-center
             "
         >

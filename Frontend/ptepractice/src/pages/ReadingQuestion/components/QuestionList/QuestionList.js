@@ -1,5 +1,6 @@
 import QuestionCard from "../QuestionCard/QuestionCard";
 import Button from "../../../../components/Button";
+import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import { useState } from "react";
 
 function QuestionList({data, ...props}) {
@@ -17,17 +18,19 @@ function QuestionList({data, ...props}) {
 
             <div className="flex justify-end" >
                 {(questionNumber===0)?false:true  &&
-                    <button className="m-[10px]"
+                    <button className="m-[10px] font-semibold hover:bg-[#a69e9d33]"
                         onClick={()=> setQuestionNumber(prev => prev-1)}
                     >
+                        <ArrowBackIos/>
                         Previous  
                     </button>
                 }
                 {(questionNumber===data.length-1)?false:true  &&
-                    <button className="m-[10px]"
+                    <button className="m-[10px] font-semibold hover:bg-[#a69e9d33]"
                         onClick={()=> setQuestionNumber(prev => prev+1)}
                     >
-                        Next  
+                        Next 
+                        <ArrowForwardIos/>
                     </button>
                 }
             </div>

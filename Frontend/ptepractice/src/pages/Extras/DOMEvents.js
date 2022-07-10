@@ -1,25 +1,7 @@
 import React from "react";
+import { CheckIcon, ClearIcon } from "../../icons/Icons/Icons";
 
 
-function TestButton({ title, href, onClick }) {
-  let Component = "button";
-
-  const props = {};
-
-  if (href) {
-    Component = "a";
-    props.href = href;
-  }
-
-  if (onClick) {
-    props.onClick = onClick;
-  }
-
-  console.log({ ...props });
-  console.log(props);
-
-  return <Component {...props}>{title}</Component>;
-}
 
 const Form = {
   Input({ testValue, ...inputProps }) {
@@ -64,8 +46,9 @@ function TwoWayBinding() {
   );
 }
 
-function TwoWayBindingRadio({children, ...props}) {
+function TwoWayBindingRadio({children,correctAnswer, showAnswer, ...props}) {
   const data = children
+  console.log(correctAnswer)
 
   const [choice, setChoice] = React.useState();
 
@@ -77,7 +60,8 @@ function TwoWayBindingRadio({children, ...props}) {
   return (
     <div className="">
       {data.map((answer, index) => (
-        <div key={index}>
+        <div key={index} className='flex'>
+          {showAnswer&&(index==correctAnswer?<ClearIcon/>:<CheckIcon/>)}
           <input
             className="h-full"
             id={index}
@@ -94,82 +78,6 @@ function TwoWayBindingRadio({children, ...props}) {
   );
 }
 
-function Counter() {
-  const [counter, setCounter] = React.useState(1);
-
-  const handleIncrease = () => {
-    setCounter((counter) => counter + 1);
-    setCounter((counter) => counter + 1);
-    setCounter((counter) => counter + 1);
-  };
-
-  const handleDecrease = () => {
-    setCounter((counter) => counter - 1);
-    setCounter((counter) => counter - 1);
-    setCounter((counter) => counter - 1);
-  };
-
-  return (
-    <React.Fragment>
-      <button onClick={handleDecrease}>-</button>
-      <h1>{counter}</h1>
-      <button onClick={handleIncrease}>+</button>
-    </React.Fragment>
-  );
-}
-
-function TwoWayBindingCheckBox() {
-  const data = [
-    {
-      id: 1,
-      name: "html",
-    },
-    {
-      id: 2,
-      name: "Java",
-    },
-    {
-      id: 3,
-      name: "css",
-    },
-    {
-      id: 4,
-      name: "Spring Boot",
-    },
-  ];
-
-  const [choiceList, setChoiceList] = React.useState([]);
-
-  const handleChoice = (id) => {
-    if (choiceList.includes(id)) {
-      console.log("in the list already");
-      setChoiceList((prev) => {
-        return prev.filter((item) => item !== id);
-      });
-    } else {
-      setChoiceList((prev) => {
-        return [...prev, id];
-      });
-    }
-  };
-
-  console.log(choiceList);
-  return (
-    <div>
-      {data.map((course) => (
-        <div key={course.id}>
-          <input
-            id={course.name}
-            type="checkbox"
-            checked={choiceList.includes(course.id)}
-            onChange={() => handleChoice(course.id)}
-          />
-          <label htmlFor={course.name}>{course.name}</label>
-        </div>
-      ))}
-    </div>
-  );
-}
 
 function ToDoList() {
   const [toDos, setToDos] = React.useState([]);
@@ -255,11 +163,9 @@ function RealtimeTitle(){
 }
 
 export {
-  TestButton,
   Form,
   TwoWayBinding,
   TwoWayBindingRadio,
-  TwoWayBindingCheckBox,
   ToDoList,
   FirstUseEffect,
   RealtimeTitle
