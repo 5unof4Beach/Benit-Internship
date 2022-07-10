@@ -1,3 +1,4 @@
+import Button from "../../../../components/Button";
 import { TwoWayBindingRadio } from "../../../Extras/DOMEvents";
 
 function QuestionCard({data, children,...props}) {
@@ -54,6 +55,9 @@ function QuestionCard({data, children,...props}) {
 
       <div className="w-[90%] ml-[10px] mt-[20px]">
         <TwoWayBindingRadio>{children.answers}</TwoWayBindingRadio>
+      </div>
+      <div className=" flex justify-start">
+        <Button>Answer</Button>
       </div>
     </div>
   );

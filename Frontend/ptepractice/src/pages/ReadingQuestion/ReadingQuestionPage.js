@@ -11,10 +11,10 @@ function ReadingQuestionPage({props}) {
     useEffect(()=>{
         getData()
             .then((res)=>{
-                setIsLoading(!isLoading)
                 return res.json()
             })
             .then(res => {
+                setIsLoading(!isLoading)
                 setData(res)
             })
     }, [])
@@ -30,7 +30,7 @@ function ReadingQuestionPage({props}) {
             {isLoading?
                 <Loading/>
                 :
-                <QuestionList data={data}></QuestionList>
+                <QuestionList data={data??[]}></QuestionList>
                 }
         </div>
      );
