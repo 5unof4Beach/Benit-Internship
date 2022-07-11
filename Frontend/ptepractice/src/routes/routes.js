@@ -22,11 +22,11 @@ const publicRoutes = [
     {path: '/signout', component: Signout, layout: HeaderOnlyLayout},
     {path: '/signin/googlesignin', component: GoogleSignin, layout: HeaderOnlyLayout},
     {path: '/reading', component: Reading},
+    {path: '/question_reorder', component: ReadingReorderPage, layout:HeaderOnlyLayout}
   ]
   
   const privateRoutes = [
     {path: '/question_bank', component: ReadingQuestionPage, layout:HeaderOnlyLayout},
-    {path: '/question_reorder', component: ReadingReorderPage, layout:HeaderOnlyLayout}
     
 ]
 

@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import Loading from "../../../components/Loading/Loading";
-import {DragDropContext} from 'react-beautiful-dnd'
+import DragList from "./components/DraggableItem/DragList";
 
-function ReadingReorderPage({props}) {
-    const [isLoading, setIsLoading] = useState(true)
+function ReadingReorderPage(props) {
+    const [isLoading, setIsLoading] = useState(false)
     const [data, setData] = useState(null)
 
     
-    useEffect(()=>{
+    // useEffect(()=>{
         // getData()
         //     .then((res)=>{
         //         return res.json()
@@ -16,21 +16,22 @@ function ReadingReorderPage({props}) {
         //         setIsLoading(!isLoading)
         //         setData(res)
         //     })
-    }, [])
+    // }, [])
     
     return ( 
         <div
             className="
             
                 w-[70%] min-w-[1000px]
-                flex justify-items-center
+                flex justify-center
             "
         >
-            {isLoading?
+            <DragList/>
+            {/* {isLoading?
                 <Loading/>
                 :
-                <></>
-                }
+                <DragList></DragList>
+                } */}
         </div>
      );
 }
