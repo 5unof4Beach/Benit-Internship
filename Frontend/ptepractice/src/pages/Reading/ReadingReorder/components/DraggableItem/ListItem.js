@@ -20,13 +20,12 @@ const DragItem = styled.div`
 `;
 
 
-const ListItem = ({ item, index }) => {
-//   const randomHeader = useMemo(() => 'lorem.generateWords(5)', []);
-  const randomHeader = 'header'
-
+const ListItem = ({ item, index, prefix }) => {
+    const header = Object.keys(item)[0]
+    const content = item[header]
   return (
     //Component
-    <Draggable draggableId={index.toString()} index={index}>
+    <Draggable draggableId={(index).toString() + prefix} index={index}>
       {(provided, snapshot) => {
         return (
             //Css
@@ -36,8 +35,8 @@ const ListItem = ({ item, index }) => {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
           >
-            <CardHeader>{randomHeader}</CardHeader>
-            <span>{item}</span>
+            <CardHeader>{header}</CardHeader>
+            <span>{content}</span>
           </DragItem>
         );
       }}

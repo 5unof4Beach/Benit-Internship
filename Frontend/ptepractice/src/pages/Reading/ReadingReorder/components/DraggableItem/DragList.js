@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
-import DroppableElement from "./DroppableElement";
+import DroppableContainer from "./DroppableContainer";
+import { data } from "autoprefixer";
 
 const DragDropContextContainer = styled.div`
   padding: 20px;
-  border: 4px solid indianred;
+  ${'' /* border: 4px solid indianred; */}
   border-radius: 6px;
   width: 1000px;
 `;
@@ -14,29 +15,46 @@ const ListGrid = styled.div`
   display: flex;
   justify-content: space-around;
   width: 100%;
-  background: gray;
-  ${"" /* grid-gap: 8px; */}
+  ${'' /* background: gray; */}
 `;
 
 const removeFromList = (list, index) => {
+  //Tra ve phan tu va mang da bi loai phan tu
   const result = Array.from(list);
   const [removed] = result.splice(index, 1);
   return [removed, result];
 };
 
 const addToList = (list, index, element) => {
+  //tra ve mang them phan tu moi
   const result = Array.from(list);
   result.splice(index, 0, element);
   return result;
 };
 
 function DragList() {
-  const [elements, setElements] = React.useState([]);
+  const [elements, setElements] = useState({'source':[], 'target':[]});
 
-  const onDragEnd = (result) => {
+  useEffect(() => {
+    data = testData[1].passages.map((passage, index) => {
+      let s = {};
+      s[index + 1] = passage;
+
+      return s;
+    });
+
+    let el = {};
+    el["source"] = data;
+    el["target"] = [];
+    setElements(el);
+  }, []);
+
+  function onDragEnd(result) {
+    console.log("on drag end called");
     if (!result.destination) {
       return;
     }
+
     const listCopy = { ...elements };
 
     const sourceList = listCopy[result.source.droppableId];
@@ -44,6 +62,7 @@ function DragList() {
       sourceList,
       result.source.index
     );
+
     listCopy[result.source.droppableId] = newSourceList;
     const destinationList = listCopy[result.destination.droppableId];
     listCopy[result.destination.droppableId] = addToList(
@@ -52,26 +71,16 @@ function DragList() {
       removedElement
     );
 
-    console.log(listCopy);
     setElements(listCopy);
-  };
+  }
 
   return (
     //Sinh ra cac Context zone
     <DragDropContextContainer>
       <DragDropContext onDragEnd={onDragEnd}>
         <ListGrid>
-          Context Zone
-            <DroppableElement
-            elements={testData[0].passages}
-            // key={listKey}
-            prefix={'Source'}
-            />
-            <DroppableElement
-            elements={[]}
-            // key={listKey}
-            prefix={'Target'}
-            />
+          <DroppableContainer elements={elements["source"]} prefix={"source"} />
+          <DroppableContainer elements={elements["target"]} prefix={"target"} />
         </ListGrid>
       </DragDropContext>
     </DragDropContextContainer>
@@ -79,16 +88,31 @@ function DragList() {
 }
 
 const testData = [
-    {
-        index:1,
-        passages:[
-            'Having worked as a literacy tutor with teenagers, Ms. Bocking saw the need for good attitudes towards reading to be formed early on-with the help of more male role models.',
-            'A University of Canberra student has launched the nation’s first father- led literacy project, to encourage fathers to become more involved in their children’s literacy.',
-            '“There’s no program like this in Australia,” Ms. Bocking said, who devised the project as the final component of her community education degree at the University.',
-            'Julia Bocking’s Literacy and Dads (LADS) project aims to increase the number of fathers participating as literacy helpers in K-2 school reading programs at Queanbeyan Primary Schools.'
-        ],
-        correct:'1320'
-    }
-]
+  {
+    index: 1,
+    passages: [
+      "Having worked as a literacy tutor with teenagers, Ms. Bocking saw the need for good attitudes towards reading to be formed early on-with the help of more male role models.",
+      "A University of Canberra student has launched the nation’s first father- led literacy project, to encourage fathers to become more involved in their children’s literacy.",
+      "“There’s no program like this in Australia,” Ms. Bocking said, who devised the project as the final component of her community education degree at the University.",
+      "Julia Bocking’s Literacy and Dads (LADS) project aims to increase the number of fathers participating as literacy helpers in K-2 school reading programs at Queanbeyan Primary Schools.",
+    ],
+    correct: "1320",
+  },
+  {
+    index: 2,
+    passages: [
+      "“There’s no program like this in Australia,” Ms. Bocking said, who devised the project as the final component of her community education degree at the University.",
+      "A University of Canberra student has launched the nation’s first father- led literacy project, to encourage fathers to become more involved in their children’s literacy.",
+      "Having worked as a literacy tutor with teenagers, Ms. Bocking saw the need for good attitudes towards reading to be formed early on-with the help of more male role models.",
+      "Julia Bocking’s Literacy and Dads (LADS) project aims to increase the number of fathers participating as literacy helpers in K-2 school reading programs at Queanbeyan Primary Schools.",
+    ],
+    correct: "1320",
+  },
+  {
+    index: 3,
+    passages: ["Paragraph 1", "Paragraph 2", "Paragraph 3", "Paragraph 4"],
+    correct: "1320",
+  },
+];
 
 export default DragList;

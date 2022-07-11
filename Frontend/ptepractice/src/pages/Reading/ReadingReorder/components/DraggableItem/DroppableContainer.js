@@ -15,8 +15,7 @@ const DroppableStyles = styled.div`
   width: 40%;
 `;
 
-function DroppableElement({ prefix, elements }) {
-  console.log(elements)
+function DroppableContainer({ prefix, elements }) {
   //Sinh ra cac droppable
   return (
     // CSS
@@ -25,10 +24,14 @@ function DroppableElement({ prefix, elements }) {
       {/* rbd component */}
       <Droppable droppableId={`${prefix}`}>
         {(provided) => (
-          <div {...provided.droppableProps} ref={provided.innerRef}>
-            Droppable Zone
+          <div 
+            {...provided.droppableProps} ref={provided.innerRef}
+            className='
+              h-[700px]
+            '
+          >
             {elements.map((item, index) => (
-              <ListItem key={index} item={item} index={index} />
+              <ListItem key={index} item={item} index={index} prefix={prefix}/>
             ))}
             {provided.placeholder}
           </div>
@@ -38,4 +41,4 @@ function DroppableElement({ prefix, elements }) {
   );
 }
 
-export default DroppableElement;
+export default DroppableContainer;
