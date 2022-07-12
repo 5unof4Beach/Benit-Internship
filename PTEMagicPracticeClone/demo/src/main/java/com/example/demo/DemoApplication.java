@@ -1,11 +1,11 @@
 package com.example.demo;
 
-import com.example.demo.Questions.Question.Question;
-import com.example.demo.Questions.QuestionRepo;
-import com.example.demo.Questions.QuestionService;
-import com.example.demo.Role.Role;
-import com.example.demo.Role.RoleRepo;
-import com.example.demo.User.UserRepository;
+import com.example.demo.Model.Question.Question;
+import com.example.demo.Repository.QuestionRepo;
+import com.example.demo.Service.QuestionService;
+import com.example.demo.Model.Role;
+import com.example.demo.Repository.RoleRepo;
+import com.example.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -43,32 +43,32 @@ public class DemoApplication implements CommandLineRunner {
 	public void createQuestion(){
 		System.out.println("Data creation started...");
 
-//		Question q1 = new Question();
-//		q1.setIndex(questionService.lastIndex() + 1);
-//		q1.setParagraph("Policymakers must confront the dilemma that fossil fuels continue to be an indispensable source of energy even though burning them produces atmospheric accumulations of carbon dioxide that increase the likelihood of potentially disastrous global climate change. Currently, the technology that would capture carbon dioxide emitted by power plants and sequester it harmlessly underground or undersea instead of releasing it into the atmosphere might double the cost of generating electricity. But because sequestration does not affect the cost of electricity transmission and distribution, delivered prices will rise less, by no more than 50 percent. Research into better technologies for capturing carbon dioxide will undoubtedly lead to lowered costs.");
-//		q1.setQuestion("Which of the following best summarises the main message of this text?");
-//		List<String> ans = new ArrayList<>();
-//		ans.add("Differing opinions on slavery contributed to the Civil War.");
-//		ans.add("The North expected and demanded Civil War.");
-//		ans.add("The radical southern states instigated the Civil War.");
-//		ans.add("Disputes between political parties had little effect on the Civil War.");
-//		q1.setAnswers(ans);
-//		q1.setCorrect("1");
-//		questionRepo.save(q1);
+		Question q1 = new Question();
+		q1.setIndex(questionService.lastIndex() + 1);
+		q1.setParagraph("These resolutions, demanding in effect that slavery be thus safeguarded-almost to the extent of introducing it into the free states-really foreshadowed the Democratic platform of 1860 which led to the great split in that party, the victory of the Republicans under Lincoln, the subsequent secession of the more radical southern states, and finally the Civil War, for it was inevitable that the North, when once aroused, would bitterly resent such pro-slavery demands.");
+		q1.setQuestion("Which of the following best summarises the main message of this text?");
+		List<String> ans = new ArrayList<>();
+		ans.add("Differing opinions on slavery contributed to the Civil War.");
+		ans.add("The North expected and demanded Civil War.");
+		ans.add("The radical southern states instigated the Civil War.");
+		ans.add("Disputes between political parties had little effect on the Civil War.");
+		q1.setAnswers(ans);
+		q1.setCorrect("1");
+		questionRepo.save(q1);
 
-//		Question q2 = new Question();
-//		q2.setIndex(questionService.lastIndex() + 1);
-//		q2.setParagraph("Policymakers must confront the dilemma that fossil fuels continue to be an indispensable source of energy even though burning them produces atmospheric accumulations of carbon dioxide that increase the likelihood of potentially disastrous global climate change. Currently, the technology that would capture carbon dioxide emitted by power plants and sequester it harmlessly underground or undersea instead of releasing it into the atmosphere might double the cost of generating electricity. But because sequestration does not affect the cost of electricity transmission and distribution, delivered prices will rise less, by no more than 50 percent. Research into better technologies for capturing carbon dioxide will undoubtedly lead to lowered costs.");
-//		q2.setQuestion("The passage implies which of the following about the current cost of generating electricity?");
-//		List<String> ans2 = new ArrayList<>();
-//		ans.add("It is higher than it would be if better technologies for capturing carbon dioxide were available.");
-//		ans.add("It is somewhat less than the cost of electricity transmission and distribution.");
-//		ans.add("It constitutes at most half of the delivered price of electricity.");
-//		ans.add("It is dwelt on by policymakers to the exclusion of other costs associated with electricity delivery.");
-//		ans.add("It is not fully recovered by the prices charged directly to electricity consumers.");
-//		q2.setAnswers(ans2);
-//		q2.setCorrect("2");
-//		questionRepo.save(q2);
+		Question q2 = new Question();
+		q2.setIndex(questionService.lastIndex() + 1);
+		q2.setParagraph("Policymakers must confront the dilemma that fossil fuels continue to be an indispensable source of energy even though burning them produces atmospheric accumulations of carbon dioxide that increase the likelihood of potentially disastrous global climate change. Currently, the technology that would capture carbon dioxide emitted by power plants and sequester it harmlessly underground or undersea instead of releasing it into the atmosphere might double the cost of generating electricity. But because sequestration does not affect the cost of electricity transmission and distribution, delivered prices will rise less, by no more than 50 percent. Research into better technologies for capturing carbon dioxide will undoubtedly lead to lowered costs.");
+		q2.setQuestion("The passage implies which of the following about the current cost of generating electricity?");
+		List<String> ans2 = new ArrayList<>();
+		ans2.add("It is higher than it would be if better technologies for capturing carbon dioxide were available.");
+		ans2.add("It is somewhat less than the cost of electricity transmission and distribution.");
+		ans2.add("It constitutes at most half of the delivered price of electricity.");
+		ans2.add("It is dwelt on by policymakers to the exclusion of other costs associated with electricity delivery.");
+		ans2.add("It is not fully recovered by the prices charged directly to electricity consumers.");
+		q2.setAnswers(ans2);
+		q2.setCorrect("2");
+		questionRepo.save(q2);
 
 		Question q3 = new Question();
 		q3.setIndex(questionService.lastIndex() + 1);
@@ -94,7 +94,7 @@ public class DemoApplication implements CommandLineRunner {
 			roleRepo.save(new Role("ROLE_MEMBER"));
 		}
 
-		createQuestion();
+//		createQuestion();
 
 
 //			User admin = new User();

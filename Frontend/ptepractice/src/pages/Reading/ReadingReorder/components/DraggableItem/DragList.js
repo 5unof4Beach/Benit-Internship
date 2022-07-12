@@ -4,20 +4,6 @@ import { DragDropContext } from "react-beautiful-dnd";
 import DroppableContainer from "./DroppableContainer";
 import { data } from "autoprefixer";
 
-const DragDropContextContainer = styled.div`
-  padding: 20px;
-  ${'' /* border: 4px solid indianred; */}
-  border-radius: 6px;
-  width: 1000px;
-`;
-
-const ListGrid = styled.div`
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  ${'' /* background: gray; */}
-`;
-
 const removeFromList = (list, index) => {
   //Tra ve phan tu va mang da bi loai phan tu
   const result = Array.from(list);
@@ -76,14 +62,21 @@ function DragList() {
 
   return (
     //Sinh ra cac Context zone
-    <DragDropContextContainer>
+    <div
+        className="
+            w-[1000px] p-[20px]
+        "
+    >
       <DragDropContext onDragEnd={onDragEnd}>
-        <ListGrid>
+        <div className="
+            h-full
+            flex justify-around
+        ">
           <DroppableContainer elements={elements["source"]} prefix={"source"} />
           <DroppableContainer elements={elements["target"]} prefix={"target"} />
-        </ListGrid>
+        </div>
       </DragDropContext>
-    </DragDropContextContainer>
+    </div>
   );
 }
 

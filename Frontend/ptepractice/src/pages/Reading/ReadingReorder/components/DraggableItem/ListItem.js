@@ -2,12 +2,6 @@ import { Draggable } from "react-beautiful-dnd";
 import React, { useMemo } from "react";
 import styled, { css } from "styled-components";
 
-
-const CardHeader = styled.div`
-  font-weight: 500;
-`;
-
-
 const DragItem = styled.div`
   padding: 10px;
   border-radius: 6px;
@@ -35,7 +29,11 @@ const ListItem = ({ item, index, prefix }) => {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
           >
-            <CardHeader>{header}</CardHeader>
+            <div
+                className="
+                    font-medium
+                "
+            >{header}</div>
             <span>{content}</span>
           </DragItem>
         );
