@@ -1,13 +1,12 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Model.GooglePojo;
+import com.example.demo.Model.GoogleUser;
 import com.example.demo.Payload.*;
 import com.example.demo.Util.GoogleUtils;
 import com.example.demo.WebSecurity.CustomUserDetails;
 import com.example.demo.Service.UserService;
 import com.example.demo.WebSecurity.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Role;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -80,7 +79,7 @@ public class DemoController {
         System.out.println("code: " + gcode);
         System.out.println("token: " + accessToken);
 
-        GooglePojo googlePojo = googleUtils.getUserInfo(accessToken);
+        GoogleUser googlePojo = googleUtils.getUserInfo(accessToken);
         UserDetails userDetail = googleUtils.buildUser(googlePojo);
 
 

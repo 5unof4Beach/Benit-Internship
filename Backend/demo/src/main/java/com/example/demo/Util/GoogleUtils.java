@@ -1,6 +1,6 @@
 package com.example.demo.Util;
 
-import com.example.demo.Model.GooglePojo;
+import com.example.demo.Model.GoogleUser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.client.ClientProtocolException;
@@ -50,17 +50,17 @@ public class GoogleUtils {
 		return accessToken.textValue();
 	}
 
-	public GooglePojo getUserInfo(final String accessToken) throws ClientProtocolException, IOException {
+	public GoogleUser getUserInfo(final String accessToken) throws ClientProtocolException, IOException {
 		String link = env.getProperty("google.link.get.user_info") + accessToken;
 		String response = Request.Get(link).execute().returnContent().asString();
 		ObjectMapper mapper = new ObjectMapper();
-		GooglePojo googlePojo = mapper.readValue(response, GooglePojo.class);
+		GoogleUser googlePojo = mapper.readValue(response, GoogleUser.class);
 		System.out.println(googlePojo);
 		return googlePojo;
 
 	}
 
-	public UserDetails buildUser(GooglePojo googlePojo) {
+	public UserDetails buildUser(GoogleUser googlePojo) {
 		boolean enabled = true;
 		boolean accountNonExpired = true;
 		boolean credentialsNonExpired = true;

@@ -37,7 +37,7 @@ public class JwtTokenProvider {
         return Long.parseLong(claims.getSubject());
     }
 
-    public boolean validateToken(String token){
+    public Boolean validateToken(String token){
         try{
             Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
             return true;
@@ -50,6 +50,7 @@ public class JwtTokenProvider {
         } catch (IllegalArgumentException ex) {
             log.error("JWT claims string is empty.");
         }
+
         return false;
     }
 }

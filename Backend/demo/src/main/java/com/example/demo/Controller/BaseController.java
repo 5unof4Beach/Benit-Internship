@@ -1,7 +1,7 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Payload.FakeMessage;
-import com.example.demo.Model.GooglePojo;
+import com.example.demo.Model.GoogleUser;
 import com.example.demo.Util.GoogleUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -41,7 +41,7 @@ public class BaseController {
 		System.out.println("code: " + code);
 		System.out.println("token: " + accessToken);
 
-		GooglePojo googlePojo = googleUtils.getUserInfo(accessToken);
+		GoogleUser googlePojo = googleUtils.getUserInfo(accessToken);
 		UserDetails userDetail = googleUtils.buildUser(googlePojo);
 
 		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetail, null,

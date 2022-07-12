@@ -1,6 +1,9 @@
 package com.example.demo.WebSecurity;
 
+import com.example.demo.Model.GoogleUser;
 import com.example.demo.Service.UserService;
+import com.example.demo.Util.GoogleUtils;
+import io.jsonwebtoken.MalformedJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,6 +25,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private JwtTokenProvider tokenProvider;
 
     @Autowired
+    GoogleUtils googleUtils;
+
+    @Autowired
     private UserService customUserDetailsService;
 
     @Override
@@ -29,26 +35,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         try {
-            // Lấy jwt từ request
-            String jwt = getJwtFromRequest(request);
-
-            if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
-                // Lấy id user từ chuỗi jwt
-                Long userId = tokenProvider.getUserIdFromJWT(jwt);
-                System.out.println(userId);
-                // Lấy thông tin người dùng từ id
-                UserDetails userDetails = customUserDetailsService.loadUserById(userId);
-                if(userDetails != null) {
-                    // Nếu người dùng hợp lệ, set thông tin cho Seturity Context
-                    UsernamePasswordAuthenticationToken
-                            authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
-                }
+            authorizeJwtToken(request);
+        } catch (MalformedJwtException ex) {
+            System.out.println("NOT JWT");
+            log.error("failed on set user authentication with JWT", ex);
+            try{
+                authorizeGoogleToken(request);
+            }catch (Exception e){
+                log.error("failed on set user authentication with Google", e);
             }
-        } catch (Exception ex) {
-            log.error("failed on set user authentication", ex);
         }
 
         filterChain.doFilter(request, response);
@@ -61,5 +56,38 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return bearerToken.substring(7);
         }
         return null;
+    }
+
+    private void authorizeJwtToken(HttpServletRequest request){
+        String jwt = getJwtFromRequest(request);
+
+        if (StringUtils.hasText(jwt) && (Boolean) tokenProvider.validateToken(jwt)) {
+            // Lấy id user từ chuỗi jwt
+            Long userId = tokenProvider.getUserIdFromJWT(jwt);
+            System.out.println(userId);
+            // Lấy thông tin người dùng từ id
+            UserDetails userDetails = customUserDetailsService.loadUserById(userId);
+            if(userDetails != null) {
+                // Nếu người dùng hợp lệ, set thông tin cho Seturity Context
+                UsernamePasswordAuthenticationToken
+                        authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+        }
+    }
+
+    private void authorizeGoogleToken(HttpServletRequest request) throws IOException {
+
+        String token = getJwtFromRequest(request);
+
+        GoogleUser googlePojo = googleUtils.getUserInfo(token);
+        UserDetails userDetail = googleUtils.buildUser(googlePojo);
+
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetail, null,
+                userDetail.getAuthorities());
+        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }
