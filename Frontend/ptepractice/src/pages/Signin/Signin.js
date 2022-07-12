@@ -1,5 +1,5 @@
 import React, { useRef, useState, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { LoginContext } from "../../Helper/Context";
 
 function Signin() {
@@ -31,6 +31,8 @@ function Signin() {
   };
 
   const handleSignIn = () => {
+    const URL = 'http://localhost:8080/jwt/login'
+
     let options = {
       method: "POST",
       headers: {
@@ -42,7 +44,7 @@ function Signin() {
       }),
     };
 
-    fetch("http://localhost:8080/jwt/login", options)
+    fetch(URL, options)
       .then((res) => {
         if (res.ok) return res.json();
 
@@ -117,6 +119,8 @@ function Signin() {
       >
         Signin With Google
       </a>
+
+      <Link to='/signup'>Create an account</Link>
     </div>
   );
 }

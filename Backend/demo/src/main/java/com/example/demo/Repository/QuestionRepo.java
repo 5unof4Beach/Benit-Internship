@@ -10,9 +10,9 @@ public interface QuestionRepo extends MongoRepository<Question, String> {
     @Query(value="{question: '?0'}", fields="{'question' : 1, 'answers' : 1, 'correct': 1}")
     Question findAllByAnswer(String question);
 
-    @Query(value="{question: '?0'}", fields="{'question' : 1, 'answers' : 1, 'correct': 1}")
-    List<Question> findAllByQuestion(String ques);
+    List<Question> findQuestionByIndex(Long index);
 
+    List<Question> deleteQuestionByIndex(Long index);
 
     public long count();
 }

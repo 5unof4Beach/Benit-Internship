@@ -62,7 +62,7 @@ public class DemoController {
 
 
     @GetMapping("/googlelogin")
-    public FakeMessage loginGoogle2(HttpServletRequest request) throws IOException {
+    public FakeMessage loginGoogle(HttpServletRequest request) throws IOException {
         String gcode = request.getParameter("code");
 
         if (gcode == null || gcode.isEmpty()) {

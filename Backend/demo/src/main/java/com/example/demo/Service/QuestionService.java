@@ -16,6 +16,20 @@ public class QuestionService {
 //        return questionRepo.findAllByQuestion("");
     }
 
+    public List<Question> getQuestionByIndex(Long index){
+        return questionRepo.findQuestionByIndex(index);
+    }
+
+    public List<Question> deleteQuestionByIndex(Long index){
+        return questionRepo.deleteQuestionByIndex(index);
+    }
+
+    public String createQuestion(Question question){
+        question.setIndex(lastIndex() + 1);
+        questionRepo.save(question);
+        return "done";
+    }
+
     public Long lastIndex(){
         return questionRepo.count();
     }

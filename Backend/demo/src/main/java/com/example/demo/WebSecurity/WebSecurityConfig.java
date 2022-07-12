@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().disable()
+        http.cors().and()
                 .csrf().disable()
                 //Phải set cái này nếu ko jwt ko có tác dụng
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
