@@ -1,4 +1,4 @@
-package com.example.demo.Model.Payload;
+package com.example.demo.Payload;
 
 import lombok.Data;
 

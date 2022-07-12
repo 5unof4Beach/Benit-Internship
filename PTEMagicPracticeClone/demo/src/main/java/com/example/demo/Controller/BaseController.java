@@ -1,8 +1,8 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Model.Payload.FakeMessage;
+import com.example.demo.Payload.FakeMessage;
 import com.example.demo.Model.GooglePojo;
-import com.example.demo.Service.GoogleUtils;
+import com.example.demo.Util.GoogleUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

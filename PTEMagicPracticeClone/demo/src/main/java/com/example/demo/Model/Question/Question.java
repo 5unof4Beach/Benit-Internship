@@ -17,9 +17,6 @@ public class Question {
     private List<String> answers;
     private String correct;
 
-    private Test testData = new Test();
-
-
 
     public Question() {
     }
@@ -37,10 +34,6 @@ public class Question {
 
     public void setParagraph(String paragraph) {
         this.paragraph = paragraph;
-    }
-
-    public void setTestData(Test testData) {
-        this.testData = testData;
     }
 
     public Long getIndex() {

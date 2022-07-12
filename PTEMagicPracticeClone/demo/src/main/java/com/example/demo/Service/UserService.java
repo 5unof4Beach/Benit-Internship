@@ -1,5 +1,5 @@
 package com.example.demo.Service;
-import com.example.demo.Model.Payload.SignupRequest;
+import com.example.demo.Payload.SignupRequest;
 import com.example.demo.Model.Role;
 import com.example.demo.Repository.RoleRepo;
 import com.example.demo.WebSecurity.CustomUserDetails;
@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -73,8 +74,11 @@ public class UserService implements UserDetailsService {
         HashSet<Role> roles = new HashSet<>();
         roles.add(roleRepo.findByName("ROLE_MEMBER"));
         user.setRoles(roles);
-
-        userRepository.save(user);
+        try{
+            userRepository.save(user);
+        }catch (Exception e){
+            return "Email Already Existed";
+        }
 
         return signupRequest.toString();
     }

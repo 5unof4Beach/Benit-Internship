@@ -7,8 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CourseRepository
-        extends JpaRepository<Course,Integer> {
+public interface CourseRepository extends JpaRepository<Course,Integer> {
     List<Course> findAllByNameContaining(String name);
 }
 

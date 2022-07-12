@@ -1,8 +1,9 @@
-package com.example.demo.Model.Payload;
+package com.example.demo.Payload;
 
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Data
 public class LoginRequest {

@@ -1,12 +1,14 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Model.Payload.*;
 import com.example.demo.Model.GooglePojo;
-import com.example.demo.Service.GoogleUtils;
+import com.example.demo.Payload.*;
+import com.example.demo.Util.GoogleUtils;
 import com.example.demo.WebSecurity.CustomUserDetails;
 import com.example.demo.Service.UserService;
 import com.example.demo.WebSecurity.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Role;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -46,51 +48,18 @@ public class DemoController {
 
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = tokenProvider.generateToken((CustomUserDetails) authentication.getPrincipal());
-        return new LoginResponse(jwt, loginRequest.getUsername());
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String jwt = tokenProvider.generateToken((CustomUserDetails) userDetails);
+        return new LoginResponse(jwt, loginRequest.getUsername(), userDetails.getAuthorities());
     }
 
     @PostMapping("/signup")
-    public LoginResponse createUser(@Valid @RequestBody SignupRequest signupRequest) {
+    public SignupResponse createUser(@Valid @RequestBody SignupRequest signupRequest) {
         String mess = userService.createNewUser(signupRequest);
-        return new LoginResponse(mess, signupRequest.getUsername());
+        return new SignupResponse(mess, signupRequest.getUsername());
     }
 
-    @GetMapping("/fake")
-    public FakeMessage randomStuff(){
-        return new FakeMessage("JWT Hợp lệ mới có thể thấy được message này");
-    }
 
-    @GetMapping("/admin")
-    public FakeMessage admin(){
-        return new FakeMessage("Admin mới có thể thấy được message này");
-    }
-
-    @PostMapping("/googlelogin1")
-    // màn hình đăng nhập tài khoản sau khi chọn tài khoản sẽ trả về request chứa code đến endpoint này
-    public FakeMessage loginGoogle(@Valid @RequestBody Code code) throws IOException {
-        String gcode = code.getCode();
-
-        if (gcode == null || gcode.isEmpty()) {
-            return new FakeMessage("No Code");
-        }
-
-        String accessToken = null;
-
-        try{
-            accessToken = googleUtils.getToken(gcode);
-        }
-        catch (Exception e){
-            return new FakeMessage("Cannot Retrieve Token With Code:" + gcode);
-        }
-        System.out.println("code: " + gcode);
-        System.out.println("token: " + accessToken);
-
-        GooglePojo googlePojo = googleUtils.getUserInfo(accessToken);
-        UserDetails userDetail = googleUtils.buildUser(googlePojo);
-
-        return new FakeMessage(accessToken);
-    }
 
     @GetMapping("/googlelogin")
     public FakeMessage loginGoogle2(HttpServletRequest request) throws IOException {
@@ -116,5 +85,16 @@ public class DemoController {
 
 
         return new FakeMessage(accessToken);
+    }
+
+    @Secured("ROLE_ADMIN")
+    @GetMapping("/admin")
+    public FakeMessage admin(){
+        return new FakeMessage("Admin mới có thể thấy được message này");
+    }
+
+    @GetMapping("/fake")
+    public FakeMessage randomStuff(){
+        return new FakeMessage("JWT Hợp lệ mới có thể thấy được message này");
     }
 }
