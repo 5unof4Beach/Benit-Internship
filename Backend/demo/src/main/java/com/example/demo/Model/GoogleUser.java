@@ -7,10 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="googleuser")
 public class GoogleUser {
-	@Id
 	private String id;
 	private String email;
 	private boolean verified_email;
@@ -19,6 +16,14 @@ public class GoogleUser {
 	private String family_name;
 	private String picture;
 	private String locale;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getEmail() {
 		return email;

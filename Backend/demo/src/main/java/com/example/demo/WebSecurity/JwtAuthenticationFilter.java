@@ -36,21 +36,25 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         try {
             authorizeJwtToken(request);
+            System.out.println("JWT Authorized");
         } catch (MalformedJwtException ex) {
             System.out.println("NOT JWT");
             log.error("failed on set user authentication with JWT", ex);
-            try{
-                authorizeGoogleToken(request);
-            }catch (Exception e){
-                log.error("failed on set user authentication with Google", e);
-            }
+        }
+
+        try{ 
+            authorizeGoogleToken(request);
+            System.out.println("Google Authorized");
+        }catch (Exception e){
+            log.error("failed on set user authentication with Google", e);
         }
 
         filterChain.doFilter(request, response);
     }
 
-    private String getJwtFromRequest(HttpServletRequest request) {
+    private String getTokenFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
+        System.out.println(bearerToken);
         // Kiểm tra xem header Authorization có chứa thông tin jwt không
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
@@ -59,7 +63,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private void authorizeJwtToken(HttpServletRequest request){
-        String jwt = getJwtFromRequest(request);
+        String jwt = getTokenFromRequest(request);
 
         if (StringUtils.hasText(jwt) && (Boolean) tokenProvider.validateToken(jwt)) {
             // Lấy id user từ chuỗi jwt
@@ -80,7 +84,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private void authorizeGoogleToken(HttpServletRequest request) throws IOException {
 
-        String token = getJwtFromRequest(request);
+        String token = getTokenFromRequest(request);
 
         GoogleUser googlePojo = googleUtils.getUserInfo(token);
         UserDetails userDetail = googleUtils.buildUser(googlePojo);
