@@ -3,11 +3,12 @@ import React, { useMemo } from "react";
 import styled, { css } from "styled-components";
 
 const DragItem = styled.div`
+  width: 95%;
   padding: 10px;
   border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  background: white;
-  margin: 0 0 8px 0;
+  border: 1px solid gray;
+  background: #FFF3D2;
+  margin: 0 0 10px 0;
   display: grid;
   grid-gap: 20px;
   flex-direction: column;

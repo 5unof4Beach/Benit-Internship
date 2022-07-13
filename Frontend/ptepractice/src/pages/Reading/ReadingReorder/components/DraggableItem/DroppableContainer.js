@@ -3,35 +3,35 @@ import ListItem from "./ListItem";
 import React from "react";
 import styled from "styled-components";
 
-const DroppableStyles = styled.div`
-  padding: 10px;
-  border-radius: 6px;
-  background: #d4d4d4;
-  width: 45%;
-  min-height: 500px;
-`;
-
 function DroppableContainer({ prefix, elements }) {
   //Sinh ra cac droppable
   return (
     // CSS
     <div
       className="
-        w-[45%]
-        min-h-[500px] 
-        rounded-[6px] 
-        p-[10px] bg-[#d4d4d4]
+        w-[50%] h-auto
+        rounded-[6px] p-[10px] 
+        
       "
     >
-      <div className="mb-[20px] flex justify-center">{prefix}</div>
+      <div 
+        className="
+          flex justify-center rounded-t-[4px] p-[20px]
+          border-l-[1px] border-t-[1px] border-r-[1px] border-black
+          font-semibold
+        "
+      >{prefix.toUpperCase()}</div>
       {/* rbd component */}
-      <Droppable droppableId={`${prefix}`}>
+      <Droppable droppableId={prefix}>
         {(provided) => (
           <div
             {...provided.droppableProps}
             ref={provided.innerRef}
             className="
-              pb-[20px]
+              pt-[10px]
+              min-h-[400px] 
+              border-[1px] border-slate-700 rounded-b-[4px]
+              flex flex-col items-center justify-items-center
             "
           >
             {elements.map((item, index) => (

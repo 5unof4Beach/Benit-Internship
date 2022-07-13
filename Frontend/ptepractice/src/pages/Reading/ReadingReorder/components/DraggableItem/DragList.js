@@ -64,12 +64,11 @@ function DragList() {
     //Sinh ra cac Context zone
     <div
         className="
-            w-[1000px] p-[20px]
+            w-[1200px] p-[20px]
         "
     >
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="
-            h-full
             flex justify-around
         ">
           <DroppableContainer elements={elements["source"]} prefix={"source"} />
