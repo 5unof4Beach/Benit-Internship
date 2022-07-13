@@ -1,7 +1,6 @@
 import { Droppable } from "react-beautiful-dnd";
 import ListItem from "./ListItem";
 import React from "react";
-import styled from "styled-components";
 
 function DroppableContainer({ prefix, elements }) {
   //Sinh ra cac droppable
@@ -32,6 +31,7 @@ function DroppableContainer({ prefix, elements }) {
               min-h-[400px] 
               border-[1px] border-slate-700 rounded-b-[4px]
               flex flex-col items-center justify-items-center
+              duration-300
             "
           >
             {elements.map((item, index) => (
@@ -41,6 +41,7 @@ function DroppableContainer({ prefix, elements }) {
           </div>
         )}
       </Droppable>
+
     </div>
   );
 }

@@ -3,7 +3,7 @@ import QuestionCard from "./components/QuestionCard/QuestionCard";
 import { useState, useEffect } from "react";
 import Loading from "../../../components/Loading/Loading";
 
-function ReadingQuestionPage({ props }) {
+function ReadingQuestionPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
 

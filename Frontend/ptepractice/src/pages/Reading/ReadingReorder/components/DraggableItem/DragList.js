@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
 import DroppableContainer from "./DroppableContainer";
-import { data } from "autoprefixer";
+import AnswerButton from "../../../components/AnswerButton/AnswerButton";
 
 const removeFromList = (list, index) => {
   //Tra ve phan tu va mang da bi loai phan tu
@@ -18,11 +18,11 @@ const addToList = (list, index, element) => {
   return result;
 };
 
-function DragList() {
+function DragList({dat}) {
   const [elements, setElements] = useState({'source':[], 'target':[]});
 
   useEffect(() => {
-    data = testData[1].passages.map((passage, index) => {
+    let data = testData[1].passages.map((passage, index) => {
       let s = {};
       s[index + 1] = passage;
 
@@ -75,6 +75,8 @@ function DragList() {
           <DroppableContainer elements={elements["target"]} prefix={"target"} />
         </div>
       </DragDropContext>
+
+      <AnswerButton/>
     </div>
   );
 }
