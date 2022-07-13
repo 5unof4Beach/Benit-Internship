@@ -4,6 +4,7 @@ package com.example.demo.WebSecurity;
 import com.example.demo.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
+@Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserService userService;
@@ -54,18 +56,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and()
                 .csrf().disable()
-                //Phải set cái này nếu ko jwt ko có tác dụng
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+            .authorizeRequests()
+                .antMatchers("auth/**")
+                .permitAll()
+                .and()
+            .authorizeRequests()
+                .antMatchers("user/**")
+                .authenticated();
 
-//        http.authorizeRequests().antMatchers("/jwt/admin").access("hasRole('ROLE_ADMIN')");
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class).anonymous();
 
-        http.authorizeRequests()
-                .antMatchers("/jwt/login/**","/jwt/signup/**","jwt/login-google/**").permitAll()
-//                .antMatchers("/jwt/fake", "/jwt/admin").authenticated();
-                .anyRequest().authenticated();
-
-
-        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
 }
+//        http.authorizeRequests().antMatchers("/jwt/admin").access("hasRole('ROLE_ADMIN')");

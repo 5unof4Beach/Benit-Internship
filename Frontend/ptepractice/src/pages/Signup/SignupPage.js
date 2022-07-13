@@ -47,7 +47,7 @@ function SignupPage() {
 }
 
 function signUp(email, userName, password){
-    const URL = 'http://localhost:8080/jwt/signup'
+    const URL = 'http://localhost:8080/auth/signup'
 
     let options = {
         method: "POST",

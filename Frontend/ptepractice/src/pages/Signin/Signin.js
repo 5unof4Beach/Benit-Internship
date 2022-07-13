@@ -8,6 +8,7 @@ function Signin() {
 
   const client_id =
     "719615345009-621atcuvo67cn1llc7ip9753dr11tts0.apps.googleusercontent.com";
+    // "744486347000-rsn3f420en55emflvuttuhvidg5p2874.apps.googleusercontent.com"
 
   const userRef = useRef();
   const [userName, setUserName] = useState("");
@@ -26,12 +27,10 @@ function Signin() {
     grant_type: "password",
   };
 
-  const handleLoggedIn = (state) => {
-    setLoggedIn(state);
-  };
+    
 
   const handleSignIn = () => {
-    const URL = 'http://localhost:8080/jwt/login'
+    const URL = 'http://localhost:8080/auth/login'
 
     let options = {
       method: "POST",
@@ -54,9 +53,10 @@ function Signin() {
         console.log(res);
         localStorage.setItem("accessToken", res.accessToken);
         localStorage.setItem("userName", res.userName);
+        localStorage.setItem('roles',res.roles)
         localStorage.setItem("loggedIn", true);
 
-        handleLoggedIn(!loggedIn);
+        setLoggedIn(!loggedIn);
         navigate("/");
       })
       .catch((Error) => {

@@ -31,12 +31,15 @@ public class GoogleUtils {
 
 		String response = null;
 		try{
+			//clientID, Secret, Redirect phai dung thi moi lay duoc token
 				response = Request.Post(link)
-				.bodyForm(Form.form().add("client_id", env.getProperty("google.app.id"))
-						.add("client_secret", env.getProperty("google.app.secret"))
+				.bodyForm(Form.form()
 						.add("redirect_uri", env.getProperty("google.redirect.uri"))
+						.add("client_id", env.getProperty("google.app.id"))
+						.add("client_secret", env.getProperty("google.app.secret"))
+						.add("grant_type", "authorization_code")
 						.add("code", code)
-						.add("grant_type", "authorization_code").build())
+						.build())
 				.execute().returnContent().asString();
 		}catch (Exception e){
 			System.err.println(e);
@@ -67,7 +70,7 @@ public class GoogleUtils {
 		boolean accountNonLocked = true;
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-		UserDetails userDetail = new User(googlePojo.getEmail(),
+		UserDetails userDetail = new User(googlePojo.getName(),
 				"", enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
 		return userDetail;
 	}

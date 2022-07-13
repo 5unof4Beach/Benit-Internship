@@ -6,6 +6,7 @@ import com.example.demo.Util.GoogleUtils;
 import com.example.demo.WebSecurity.CustomUserDetails;
 import com.example.demo.Service.UserService;
 import com.example.demo.WebSecurity.JwtTokenProvider;
+import org.hibernate.annotations.Any;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,7 +22,7 @@ import java.io.IOException;
 
 @RestController
 @CrossOrigin
-@RequestMapping(path = "/jwt")
+@RequestMapping(path = "/auth")
 public class DemoController {
     @Autowired
     AuthenticationManager authenticationManager;
@@ -58,36 +59,37 @@ public class DemoController {
         return new SignupResponse(mess, signupRequest.getUsername());
     }
 
+    @GetMapping("/test")
+    public void test(){
+        System.out.println("this is jwt link test");
+    }
 
-
-    @GetMapping("/googlelogin")
-    public FakeMessage loginGoogle(HttpServletRequest request) throws IOException {
-        String gcode = request.getParameter("code");
-
-        if (gcode == null || gcode.isEmpty()) {
-            return new FakeMessage("No Code");
+    @PostMapping("/googlelogin")
+    public LoginResponse loginGoogle(@Valid @RequestBody Code gcode) throws IOException {
+        String code = gcode.getCode();
+        if (code == null || code.isEmpty()) {
+//            return new FakeMessage("No Code");
         }
+        System.out.println("code: " + code);
 
         String accessToken = null;
 
         try{
-            accessToken = googleUtils.getToken(gcode);
+            accessToken = googleUtils.getToken(code);
         }
         catch (Exception e){
-            return new FakeMessage("Cannot Retrieve Token With Code:" + gcode);
+
         }
-        System.out.println("code: " + gcode);
         System.out.println("token: " + accessToken);
 
         GoogleUser googlePojo = googleUtils.getUserInfo(accessToken);
         UserDetails userDetail = googleUtils.buildUser(googlePojo);
 
 
-        return new FakeMessage(accessToken);
+        return new LoginResponse(accessToken,userDetail.getUsername(),userDetail.getAuthorities());
     }
 
-    @Secured("ROLE_ADMIN")
-    @GetMapping("/admin")
+    @PostMapping("/admin")
     public FakeMessage admin(){
         return new FakeMessage("Admin mới có thể thấy được message này");
     }
