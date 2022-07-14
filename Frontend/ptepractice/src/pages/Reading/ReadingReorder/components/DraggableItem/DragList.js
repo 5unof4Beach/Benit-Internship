@@ -4,25 +4,13 @@ import { DragDropContext } from "react-beautiful-dnd";
 import DroppableContainer from "./DroppableContainer";
 import AnswerButton from "../../../components/AnswerButton/AnswerButton";
 
-const removeFromList = (list, index) => {
-  //Tra ve phan tu va mang da bi loai phan tu
-  const result = Array.from(list);
-  const [removed] = result.splice(index, 1);
-  return [removed, result];
-};
-
-const addToList = (list, index, element) => {
-  //tra ve mang them phan tu moi
-  const result = Array.from(list);
-  result.splice(index, 0, element);
-  return result;
-};
-
-function DragList({dat}) {
+function DragList({children}) {
   const [elements, setElements] = useState({'source':[], 'target':[]});
 
+  console.log(children)
+
   useEffect(() => {
-    let data = testData[1].passages.map((passage, index) => {
+    let data = children.passages.map((passage, index) => {
       let s = {};
       s[index + 1] = passage;
 
@@ -33,7 +21,7 @@ function DragList({dat}) {
     el["source"] = data;
     el["target"] = [];
     setElements(el);
-  }, []);
+  }, [children]);
 
   function onDragEnd(result) {
     console.log("on drag end called");
@@ -108,5 +96,19 @@ const testData = [
     correct: "1320",
   },
 ];
+
+const removeFromList = (list, index) => {
+  //Tra ve phan tu va mang da bi loai phan tu
+  const result = Array.from(list);
+  const [removed] = result.splice(index, 1);
+  return [removed, result];
+};
+
+const addToList = (list, index, element) => {
+  //tra ve mang them phan tu moi
+  const result = Array.from(list);
+  result.splice(index, 0, element);
+  return result;
+};
 
 export default DragList;

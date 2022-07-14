@@ -5,20 +5,22 @@ import Guide from "../components/Guide";
 import Navigator from "../components/Navigator/Navigator";
 
 function ReadingReorderPage(props) {
-    const [isLoading, setIsLoading] = useState(false)
-    const [data, setData] = useState(null)
+    const [isLoading, setIsLoading] = useState(true)
+    const [data, setData] = useState([])
+    const [questionNumber, setQuestionNumber] = useState(0)
 
     
-    // useEffect(()=>{
-        // getData()
-        //     .then((res)=>{
-        //         return res.json()
-        //     })
-        //     .then(res => {
-        //         setIsLoading(!isLoading)
-        //         setData(res)
-        //     })
-    // }, [])
+    useEffect(()=>{
+        getData()
+            .then((res)=>{
+                return res.json()
+            })
+            .then(res => {
+                setIsLoading(false)
+                setData(res)
+                // console.log(res)
+            })
+    }, [])
     
     return ( 
         <div
@@ -27,23 +29,29 @@ function ReadingReorderPage(props) {
                 flex flex-col items-center
             "
         >
-            <Guide 
-                leadingIndex={1}
-                guidePassage='The text boxes in the left panel have been placed in a random order. Restore the original order by dragging the text boxer from the left panel to the right panel.'
-            />
-            <DragList/>
-
-            <Navigator questionNumber={1} setQuestionNumber numberOfQuestion/>
-            {/* {isLoading?
+            {isLoading?
                 <Loading/>
                 :
-                <DragList></DragList>
-                } */}
+                <>
+                    <Guide 
+                        leadingIndex={1}
+                        guidePassage='The text boxes in the left panel have been placed in a random order. Restore the original order by dragging the text boxer from the left panel to the right panel.'
+                    />
+                    <DragList>{data[questionNumber]}</DragList>
+                    <Navigator 
+                        questionNumber={questionNumber} 
+                        setQuestionNumber={setQuestionNumber} 
+                        numberOfQuestion={data.length}/>
+                </>
+                
+                }
         </div>
      );
 }
 
 const getData = () => {
+    const URL = 'http://localhost:8080/api/reading/pr'
+
     let options = {
         method: "GET",
         headers: {
@@ -51,7 +59,7 @@ const getData = () => {
         },
       };
   
-      return fetch("http://localhost:8080/api/question", options)
+      return fetch(URL, options)
 }
 
 export default ReadingReorderPage;

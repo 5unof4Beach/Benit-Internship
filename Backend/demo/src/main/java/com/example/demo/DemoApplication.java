@@ -1,15 +1,18 @@
 package com.example.demo;
 
-import com.example.demo.Model.Question.Question;
-import com.example.demo.Repository.QuestionRepo;
-import com.example.demo.Service.QuestionService;
-import com.example.demo.Model.Role;
+import com.example.demo.Model.Reading.SingleAnswerQuestion;
+import com.example.demo.Model.Result.SingleAnswerResult;
+import com.example.demo.Repository.Reading.SingleAnswerQuestionRepo;
+import com.example.demo.Service.EmailSenderService;
+import com.example.demo.Service.Reading.SingleAnswerQuestionService;
 import com.example.demo.Repository.RoleRepo;
 import com.example.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
@@ -26,25 +29,28 @@ public class DemoApplication implements CommandLineRunner {
 	PasswordEncoder passwordEncoder;
 	UserRepository userRepository;
 
-	QuestionRepo questionRepo;
+	SingleAnswerQuestionRepo singleAnswerQuestionRepo;
 
-	QuestionService questionService;
+	SingleAnswerQuestionService singleAnswerQuestionService;
 	RoleRepo roleRepo;
 
+	EmailSenderService emailSenderService;
+
 	@Autowired
-	public DemoApplication(QuestionService questionService,QuestionRepo questionRepo, RoleRepo roleRepo,PasswordEncoder passwordEncoder, UserRepository userRepository) {
+	public DemoApplication(EmailSenderService emailSenderService, SingleAnswerQuestionService singleAnswerQuestionService, SingleAnswerQuestionRepo singleAnswerQuestionRepo, RoleRepo roleRepo, PasswordEncoder passwordEncoder, UserRepository userRepository) {
 		this.passwordEncoder = passwordEncoder;
 		this.userRepository = userRepository;
 		this.roleRepo = roleRepo;
-		this.questionRepo = questionRepo;
-		this.questionService = questionService;
+		this.singleAnswerQuestionRepo = singleAnswerQuestionRepo;
+		this.singleAnswerQuestionService = singleAnswerQuestionService;
+		this.emailSenderService = emailSenderService;
 	}
 
 	public void createQuestion(){
 		System.out.println("Data creation started...");
 
-		Question q1 = new Question();
-		q1.setIndex(questionService.lastIndex() + 1);
+		SingleAnswerQuestion q1 = new SingleAnswerQuestion();
+		q1.setIndex(singleAnswerQuestionService.getTotal() + 1);
 		q1.setParagraph("These resolutions, demanding in effect that slavery be thus safeguarded-almost to the extent of introducing it into the free states-really foreshadowed the Democratic platform of 1860 which led to the great split in that party, the victory of the Republicans under Lincoln, the subsequent secession of the more radical southern states, and finally the Civil War, for it was inevitable that the North, when once aroused, would bitterly resent such pro-slavery demands.");
 		q1.setQuestion("Which of the following best summarises the main message of this text?");
 		List<String> ans = new ArrayList<>();
@@ -54,10 +60,10 @@ public class DemoApplication implements CommandLineRunner {
 		ans.add("Disputes between political parties had little effect on the Civil War.");
 		q1.setAnswers(ans);
 		q1.setCorrect("1");
-		questionRepo.save(q1);
+		singleAnswerQuestionRepo.save(q1);
 
-		Question q2 = new Question();
-		q2.setIndex(questionService.lastIndex() + 1);
+		SingleAnswerQuestion q2 = new SingleAnswerQuestion();
+		q2.setIndex(singleAnswerQuestionService.getTotal() + 1);
 		q2.setParagraph("Policymakers must confront the dilemma that fossil fuels continue to be an indispensable source of energy even though burning them produces atmospheric accumulations of carbon dioxide that increase the likelihood of potentially disastrous global climate change. Currently, the technology that would capture carbon dioxide emitted by power plants and sequester it harmlessly underground or undersea instead of releasing it into the atmosphere might double the cost of generating electricity. But because sequestration does not affect the cost of electricity transmission and distribution, delivered prices will rise less, by no more than 50 percent. Research into better technologies for capturing carbon dioxide will undoubtedly lead to lowered costs.");
 		q2.setQuestion("The passage implies which of the following about the current cost of generating electricity?");
 		List<String> ans2 = new ArrayList<>();
@@ -68,10 +74,10 @@ public class DemoApplication implements CommandLineRunner {
 		ans2.add("It is not fully recovered by the prices charged directly to electricity consumers.");
 		q2.setAnswers(ans2);
 		q2.setCorrect("2");
-		questionRepo.save(q2);
+		singleAnswerQuestionRepo.save(q2);
 
-		Question q3 = new Question();
-		q3.setIndex(questionService.lastIndex() + 1);
+		SingleAnswerQuestion q3 = new SingleAnswerQuestion();
+		q3.setIndex(singleAnswerQuestionService.getTotal() + 1);
 		q3.setParagraph("Caffeine is a natural ingredient in coffee, cocoa, tea, and chocolate, and is added to some prescription and nonprescription drugs. Despite being \"natural,\" Caffeine is also a powerful drug which greatly affects the body. In healthy, rested people, a dose of 100 milligrams (about one cup of coffee) increases alertness, banishes drowsiness, quickens reaction time, it enhances intellectual and muscular effort, and increases heart and respiratory rates. Drinking one to two cups of coffee an hour before exercise encourages the body to preserve glycogen and burn fat – something that results in greater endurance. In addition, caffeine masks fatigue. In doses above 300 milligrams, caffeine can produce sleeplessness, nervousness, irritability, headaches, heart palpitations, and muscle twitches. Caffeine is also habit-forming, and those who try to suddenly stop after heavy use may experience such withdrawal symptoms as headaches, lethargy, irritability, and difficulty in concentrating.");
 		q3.setQuestion("Which of the following most accurately summarizes the opinion of the author in the text?");
 		List<String> ans3 = new ArrayList<>();
@@ -81,18 +87,22 @@ public class DemoApplication implements CommandLineRunner {
 		ans3.add("Caffeine is a strong drug that only enhances the body when used.");
 		q3.setAnswers(ans3);
 		q3.setCorrect("0");
-		questionRepo.save(q3);
+		singleAnswerQuestionRepo.save(q3);
 		System.out.println("Data creation complete...");
 	}
 	@Override
 	public void run(String... args) throws Exception {
-		if (roleRepo.findByName("ROLE_ADMIN") == null) {
-			roleRepo.save(new Role("ROLE_ADMIN"));
-		}
+		SingleAnswerResult singleAnswerResult = new SingleAnswerResult(1L, true);
 
-		if (roleRepo.findByName("ROLE_MEMBER") == null) {
-			roleRepo.save(new Role("ROLE_MEMBER"));
-		}
+		System.out.println(singleAnswerResult);
+
+//		if (roleRepo.findByName("ROLE_ADMIN") == null) {
+//			roleRepo.save(new Role("ROLE_ADMIN"));
+//		}
+//
+//		if (roleRepo.findByName("ROLE_MEMBER") == null) {
+//			roleRepo.save(new Role("ROLE_MEMBER"));
+//		}
 
 //		createQuestion();
 
@@ -113,5 +123,10 @@ public class DemoApplication implements CommandLineRunner {
 //			admin2.setRoles(roles2);
 //
 //			userRepository.saveAll(List.of(admin, admin2));
+	}
+
+	@EventListener(ApplicationReadyEvent.class)
+	public void sendMail(){
+//		emailSenderService.sendEmail("suckmydick2001gta@gmail.com","Test email from Benit Internship","Test email");
 	}
 }

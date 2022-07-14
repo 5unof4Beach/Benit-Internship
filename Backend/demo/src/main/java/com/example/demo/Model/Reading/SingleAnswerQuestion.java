@@ -1,4 +1,4 @@
-package com.example.demo.Model.Question;
+package com.example.demo.Model.Reading;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import java.util.List;
 
 @Document("questions")
-public class Question {
+public class SingleAnswerQuestion {
     @Id
     String id;
 
@@ -18,10 +18,10 @@ public class Question {
     private String correct;
 
 
-    public Question() {
+    public SingleAnswerQuestion() {
     }
 
-    public Question(Long index, String question, List<String> answers, String correct) {
+    public SingleAnswerQuestion(Long index, String question, List<String> answers, String correct) {
         this.index = index;
         this.question = question;
         this.answers = answers;

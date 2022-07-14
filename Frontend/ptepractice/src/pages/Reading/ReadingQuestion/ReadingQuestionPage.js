@@ -36,6 +36,8 @@ function ReadingQuestionPage() {
 }
 
 const getData = () => {
+  const URL = 'http://localhost:8080/api/reading/sa'
+
   let options = {
     method: "GET",
     headers: new Headers({
@@ -44,7 +46,7 @@ const getData = () => {
     }),
   };
 
-  return fetch("http://localhost:8080/api/question", options);
+  return fetch(URL, options);
 };
 
 export default ReadingQuestionPage;
