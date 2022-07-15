@@ -1,15 +1,7 @@
 import { TwoWayBindingRadio } from "../../../../Extras/DOMEvents";
-import { useState, useEffect } from "react";
 import Guide from "../../../components/Guide/Guide";
-import AnswerButton from "../../../components/AnswerButton/AnswerButton";
 
-function QuestionCard({ data, children, ...props }) {
-  const [showAnswer, setShowAnswer] = useState(false);
-
-  useEffect(() => {
-    setShowAnswer(false);
-  }, [children.index]);
-
+function QuestionCard({ data, children, showAnswerState, ...props }) {
   return (
     <div className="flex flex-col items-center mt-[10px] h-[500px]">
       <Guide
@@ -38,13 +30,13 @@ function QuestionCard({ data, children, ...props }) {
 
       <div className="w-[90%] ml-[10px] mt-[20px]">
         <TwoWayBindingRadio
-          showAnswer={showAnswer}
+          showAnswer={showAnswerState}
           correctAnswer={children.correct}
         >
           {children.answers}
         </TwoWayBindingRadio>
       </div>
-      <AnswerButton setShowAnswer={setShowAnswer}/>
+      {/* <AnswerButton setShowAnswer={setShowAnswer}/> */}
     </div>
   );
 }

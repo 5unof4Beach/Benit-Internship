@@ -1,8 +1,8 @@
 import { Droppable } from "react-beautiful-dnd";
-import ListItem from "./ListItem";
+import DraggableItem from "./DraggableItem";
 import React from "react";
 
-function DroppableContainer({ prefix, elements }) {
+function DroppableContainer({ prefix, elements, correct }) {
   //Sinh ra cac droppable
   return (
     // CSS
@@ -35,7 +35,13 @@ function DroppableContainer({ prefix, elements }) {
             "
           >
             {elements.map((item, index) => (
-              <ListItem key={index} item={item} index={index} prefix={prefix} />
+              <DraggableItem 
+                correctAnswer={correct[index]}
+                key={index} 
+                item={item} 
+                index={index} 
+                prefix={prefix}
+              />
             ))}
             {provided.placeholder}
           </div>

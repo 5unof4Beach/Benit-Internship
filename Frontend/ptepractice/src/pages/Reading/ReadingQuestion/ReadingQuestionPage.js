@@ -1,5 +1,4 @@
 import QuestionList from "./components/QuestionList/QuestionList";
-import QuestionCard from "./components/QuestionCard/QuestionCard";
 import { useState, useEffect } from "react";
 import Loading from "../../../components/Loading/Loading";
 
@@ -36,13 +35,13 @@ function ReadingQuestionPage() {
 }
 
 const getData = () => {
-  const URL = 'http://localhost:8080/api/reading/sa'
+  const URL = "http://localhost:8080/api/reading/sa";
 
   let options = {
     method: "GET",
     headers: new Headers({
-      'Authorization': `Bearer ${localStorage.getItem("accessToken")}`,
-      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      "Content-Type": "application/json",
     }),
   };
 
