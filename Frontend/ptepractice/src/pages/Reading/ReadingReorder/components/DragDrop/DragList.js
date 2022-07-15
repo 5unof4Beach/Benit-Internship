@@ -63,7 +63,8 @@ function DragList({ children }) {
           <DroppableContainer 
             elements={elements["source"]} 
             correct={correct}
-            prefix={"source"} />
+            prefix={"source"} 
+          />
 
           <DroppableContainer
             elements={elements["target"]}

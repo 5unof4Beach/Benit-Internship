@@ -46,11 +46,12 @@ function Reading() {
             title='MC, choose single answer'
         />
         <SelectionCard
-            href='/question_reorder'
+            href='/reading_reorder_paragraph'
             name='READING'
             title='Re-order paragraphs'
         />
         <SelectionCard
+            href='/reading_fillin_blank'
             name='READING'
             title='R&W: Fill in the blanks [RWFIB]'
         />

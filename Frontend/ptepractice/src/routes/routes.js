@@ -12,6 +12,7 @@ import Signout from "../pages/Signout";
 import Reading from "../pages/Reading";
 import ReadingQuestionPage from "../pages/Reading/ReadingQuestion/ReadingQuestionPage";
 import ReadingReorderPage from "../pages/Reading/ReadingReorder/ReadingReorderPage";
+import ReadingFillInBlankPage from "../pages/Reading/ReadingFillInBlank/ReadingFillInBlankPage";
 import Loading from "../components/Loading/Loading";
 
 
@@ -24,7 +25,8 @@ const publicRoutes = [
     {path: '/signout', component: Signout, layout: HeaderOnlyLayout},
     {path: '/signin/googlesignin', component: GoogleSignin, layout: HeaderOnlyLayout},
     {path: '/reading', component: Reading},
-    {path: '/question_reorder', component: ReadingReorderPage, layout:HeaderOnlyLayout}
+    {path: '/reading_reorder_paragraph', component: ReadingReorderPage, layout:HeaderOnlyLayout},
+    {path: '/reading_fillin_blank', component: ReadingFillInBlankPage, layout:HeaderOnlyLayout}
   ]
   
   const privateRoutes = [

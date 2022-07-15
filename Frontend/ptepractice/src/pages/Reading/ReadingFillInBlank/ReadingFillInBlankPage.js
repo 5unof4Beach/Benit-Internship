@@ -6,7 +6,7 @@ import Navigator from "../components/Navigator/Navigator";
 import AnswerButton from "../components/AnswerButton/AnswerButton";
 import { ShowAnswerContext } from "../../../Helper/Context";
 
-function ReadingReorderPage(props) {
+function ReadingFillInBlankPage(props) {
     const [isLoading, setIsLoading] = useState(true)
     const [data, setData] = useState([])
     const [questionNumber, setQuestionNumber] = useState(0)
@@ -43,7 +43,7 @@ function ReadingReorderPage(props) {
                     <>
                         <Guide 
                             leadingIndex={questionNumber+1}
-                            guidePassage='The text boxes in the left panel have been placed in a random order. Restore the original order by dragging the text boxer from the left panel to the right panel.'
+                            guidePassage='In the text below some words are missing. Drag words from the box below to the appropriate place in the text. To undo an answer choice, drag the word back to the box below the text.'
                         />
                         <DragList>{data[questionNumber]}</DragList>
                         <div 
@@ -79,4 +79,4 @@ const getData = () => {
       return fetch(URL, options)
 }
 
-export default ReadingReorderPage;
+export default ReadingFillInBlankPage;
