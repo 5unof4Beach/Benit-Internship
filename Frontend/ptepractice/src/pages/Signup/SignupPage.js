@@ -14,7 +14,7 @@ function SignupPage() {
         
         su
         .then((res)=>{
-            if(res.status == 406){
+            if(res.ok){
                 setMess('Sign up successfully')
                 navigate('/signin')
                 return res

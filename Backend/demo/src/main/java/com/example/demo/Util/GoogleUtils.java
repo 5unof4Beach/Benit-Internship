@@ -24,7 +24,7 @@ public class GoogleUtils {
 	@Autowired
 	private Environment env;
 
-	public String getToken(final String code) throws ClientProtocolException, IOException {
+	public JsonNode getToken(final String code) throws IOException {
 		String link = env.getProperty("google.link.get.token");
 
 		System.out.println("Getting Token");
@@ -47,13 +47,10 @@ public class GoogleUtils {
 
 		System.out.println(response);
 		ObjectMapper mapper = new ObjectMapper();
-		JsonNode accessToken = mapper.readTree(response).get("access_token");
-		JsonNode refreshToken = mapper.readTree(response).get("refresh_token");
-
-		return accessToken.textValue();
+		return mapper.readTree(response);
 	}
 
-	public GoogleUser getUserInfo(final String accessToken) throws ClientProtocolException, IOException {
+	public GoogleUser getUserInfo(final String accessToken) throws IOException {
 		String link = env.getProperty("google.link.get.user_info") + accessToken;
 		String response = Request.Get(link).execute().returnContent().asString();
 		ObjectMapper mapper = new ObjectMapper();

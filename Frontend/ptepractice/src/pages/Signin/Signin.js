@@ -52,6 +52,7 @@ function Signin() {
       .then((res) => {
         console.log(res);
         localStorage.setItem("accessToken", res.accessToken);
+        localStorage.setItem("refreshToken", res.refreshToken);
         localStorage.setItem("userName", res.userName);
         localStorage.setItem('roles',res.roles)
         localStorage.setItem("loggedIn", true);

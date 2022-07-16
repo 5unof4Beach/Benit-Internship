@@ -1,7 +1,10 @@
-package com.example.demo.WebSecurity;
+package com.example.demo.Util;
 
+import com.example.demo.WebSecurity.CustomUserDetails;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -9,10 +12,10 @@ import java.util.Date;
 @Component
 @Slf4j
 public class JwtTokenProvider {
-
-    private final String secret = "secret";
-
-    private final Long JWT_EXPIRATION = 3600000L;
+    @Value("${demo.app.jwtExpirationMs}")
+    private Long JWT_EXPIRATION ;
+    @Value("${demo.app.jwtSecret}")
+    private String secret;
 
     public String generateToken(CustomUserDetails userDetails){
         Date now = new Date();
@@ -50,7 +53,6 @@ public class JwtTokenProvider {
         } catch (IllegalArgumentException ex) {
             log.error("JWT claims string is empty.");
         }
-
         return false;
     }
 }

@@ -14,7 +14,6 @@ function DropdownMenu(props) {
 
   useEffect(() => {
     let firstChild = dropdownRef.current.firstChild
-    console.log(firstChild)
     let height = firstChild.offsetHeight 
     setMenuHeight(height);
   }, []);
