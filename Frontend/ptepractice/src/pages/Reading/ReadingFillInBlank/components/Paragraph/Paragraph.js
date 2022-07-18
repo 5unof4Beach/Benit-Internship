@@ -5,10 +5,10 @@ function Paragraph({ children, correct, elements }) {
   return (
     <div
       className="
-                      w-[70%] min-h-[300px]
-                      border-[1px] border-black rounded-t-[6px] p-[10px]
-                      flex flex-wrap
-                      "
+        w-[70%] min-h-[300px]
+        border-[1px] border-black rounded-t-[6px] p-[10px]
+        flex flex-wrap
+        "
     >
       <div className="inline-block leading-[70px]">
         {children.map((segment, index) => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Routes, Route, Link, Router } from "react-router-dom";
 
 import { LoginContext } from "./Helper/Context";
@@ -10,7 +10,7 @@ import { privateRoutes, publicRoutes } from "./routes/index.js";
 import Auth from "./components/Auth";
 
 function App() {
-  const [loggedIn, setLoggedIn] = React.useState(
+  const [loggedIn, setLoggedIn] = useState(
     localStorage.getItem("loggedIn") ?? false
   );
 

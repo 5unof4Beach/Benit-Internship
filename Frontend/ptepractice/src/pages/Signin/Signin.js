@@ -3,13 +3,6 @@ import { useNavigate, Link } from "react-router-dom";
 import { LoginContext } from "../../Helper/Context";
 
 function Signin() {
-  const redirect_uri = "http://localhost:3000/signin/googlesignin";
-  // const redirect_uri = 'http://localhost:8080/jwt/googlelogin'
-
-  const client_id =
-    "719615345009-621atcuvo67cn1llc7ip9753dr11tts0.apps.googleusercontent.com";
-    // "744486347000-rsn3f420en55emflvuttuhvidg5p2874.apps.googleusercontent.com"
-
   const userRef = useRef();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -18,7 +11,7 @@ function Signin() {
   useEffect(() => {
     userRef.current.focus();
   }, []);
-
+  
   let navigate = useNavigate();
 
   const handleSignIn = () => {
@@ -102,7 +95,23 @@ function Signin() {
         Sign In
       </button>
 
-      <a
+      <GoogleSignin/>
+
+      <Link to='/signup'>Create an account</Link>
+    </div>
+  );
+}
+
+function GoogleSignin() {
+  const redirect_uri = "http://localhost:3000/signin/googlesignin";
+  // const redirect_uri = 'http://localhost:8080/jwt/googlelogin'
+
+  const client_id =
+    "719615345009-621atcuvo67cn1llc7ip9753dr11tts0.apps.googleusercontent.com";
+    // "744486347000-rsn3f420en55emflvuttuhvidg5p2874.apps.googleusercontent.com"
+
+  return ( 
+    <a
         className="
             border-black 
             border-[2px]
@@ -112,10 +121,8 @@ function Signin() {
       >
         Signin With Google
       </a>
-
-      <Link to='/signup'>Create an account</Link>
-    </div>
-  );
+   );
 }
+
 
 export default Signin;

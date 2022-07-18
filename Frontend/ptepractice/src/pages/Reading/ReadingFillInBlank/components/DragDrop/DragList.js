@@ -16,7 +16,7 @@ function DragList({ children }) {
     //Sinh ra cac Context zone
     <div
       className="
-          w-[1200px] p-[20px]
+          w-full p-[20px]
         "
     >
       <DragDropContext
