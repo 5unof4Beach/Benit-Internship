@@ -12,13 +12,6 @@ function DroppableContainer({ prefix, elements, correct }) {
         rounded-[6px]
       "
     >
-      {/* <div 
-        className="
-          flex justify-center rounded-t-[4px] p-[20px]
-          border-l-[1px] border-t-[1px] border-r-[1px] border-black
-          font-semibold
-        "
-      >{prefix.toUpperCase()}</div> */}
 
       {/* rbd component */}
       <Droppable droppableId={prefix} direction='horizontal'>
@@ -29,7 +22,7 @@ function DroppableContainer({ prefix, elements, correct }) {
             className="
               min-h-[80px]
               border-l-[1px] border-r-[1px] border-b-[1px] border-slate-700 rounded-b-[4px]
-              flex items-center justify-start
+              flex flex-wrap items-center justify-start
               duration-300
             "
           >

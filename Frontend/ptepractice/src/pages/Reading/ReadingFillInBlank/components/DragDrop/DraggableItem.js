@@ -7,7 +7,7 @@ const DraggableItem = ({ item, index, prefix, correctAnswer }) => {
 
   const header = Object.keys(item)[0];
   const content = item[header];
-  const defaultStyle = `min-w-[80px] p-[5px] ml-[5px] mr-[5px] rounded-[6px] 
+  const defaultStyle = `min-w-[80px] p-[5px] m-[5px] rounded-[6px] 
                     border-[1px] border-black `;
 
   const normalStyle =  defaultStyle + `bg-[#FFF3D2]`;
@@ -34,7 +34,6 @@ const DraggableItem = ({ item, index, prefix, correctAnswer }) => {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
           >
-            {/* <div className=" font-medium ">{header}</div> */}
             <span>{content}</span>
           </div>
         );

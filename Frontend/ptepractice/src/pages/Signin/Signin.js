@@ -21,14 +21,6 @@ function Signin() {
 
   let navigate = useNavigate();
 
-  var details = {
-    userName: "test@gmail.com",
-    password: "Password!",
-    grant_type: "password",
-  };
-
-    
-
   const handleSignIn = () => {
     const URL = 'http://localhost:8080/auth/login'
 

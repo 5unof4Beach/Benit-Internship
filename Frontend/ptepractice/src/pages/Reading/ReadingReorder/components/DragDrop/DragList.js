@@ -3,49 +3,15 @@ import { DragDropContext } from "react-beautiful-dnd";
 import DroppableContainer from "./DroppableContainer";
 
 function DragList({ children }) {
-  const [elements, setElements] = useState({ source: [], target: [] });
+  const [elements, setElements] = useState(createElements(children));
   const [correct, setCorrect] = useState(children.correct)
 
   useEffect(() => {
-    let data = children.passages.map((passage, index) => {
-      let s = {};
-      s[index + 1] = passage;
-
-      return s;
-    });
-
-    let el = {};
-    el["source"] = data;
-    el["target"] = [];
-
-    setElements(el);
+    setElements(createElements(children))
     setCorrect(children.correct)
   }, [children]);
 
-  function onDragEnd(result) {
-    console.log("on drag end called");
-    if (!result.destination) {
-      return;
-    }
-
-    const listCopy = { ...elements };
-
-    const sourceList = listCopy[result.source.droppableId];
-    const [removedElement, newSourceList] = removeFromList(
-      sourceList,
-      result.source.index
-    );
-
-    listCopy[result.source.droppableId] = newSourceList;
-    const destinationList = listCopy[result.destination.droppableId];
-    listCopy[result.destination.droppableId] = addToList(
-      destinationList,
-      result.destination.index,
-      removedElement
-    );
-
-    setElements(listCopy);
-  }
+  
 
   return (
     //Sinh ra cac Context zone
@@ -54,7 +20,7 @@ function DragList({ children }) {
             w-[1200px] p-[20px]
         "
     >
-      <DragDropContext onDragEnd={onDragEnd}>
+      <DragDropContext onDragEnd={(result) => onDragEnd(result, elements, setElements)}>
         <div
           className="
             flex justify-around
@@ -91,32 +57,45 @@ const addToList = (list, index, element) => {
   return result;
 };
 
+function onDragEnd(result, elements, setElements) {
+  console.log("on drag end called");
+  if (!result.destination) {
+    return;
+  }
+
+  const listCopy = { ...elements };
+
+  const sourceList = listCopy[result.source.droppableId];
+  const [removedElement, newSourceList] = removeFromList(
+    sourceList,
+    result.source.index
+  );
+
+  listCopy[result.source.droppableId] = newSourceList;
+  const destinationList = listCopy[result.destination.droppableId];
+  listCopy[result.destination.droppableId] = addToList(
+    destinationList,
+    result.destination.index,
+    removedElement
+  );
+
+  setElements(listCopy);
+}
+
+const createElements = (data) => {
+  let elements = {};
+  const passages = data.passages;
+
+  const convert = passages.reduce((acc, item, index) => {
+    return [...acc, { [index + 1]: item }];
+  }, []);
+
+  elements["source"] = convert;
+  elements['target'] = []
+
+
+  return elements;
+};
+
 export default DragList;
 
-// const testData = [
-//   {
-//     index: 1,
-//     passages: [
-//       "Having worked as a literacy tutor with teenagers, Ms. Bocking saw the need for good attitudes towards reading to be formed early on-with the help of more male role models.",
-//       "A University of Canberra student has launched the nation’s first father- led literacy project, to encourage fathers to become more involved in their children’s literacy.",
-//       "“There’s no program like this in Australia,” Ms. Bocking said, who devised the project as the final component of her community education degree at the University.",
-//       "Julia Bocking’s Literacy and Dads (LADS) project aims to increase the number of fathers participating as literacy helpers in K-2 school reading programs at Queanbeyan Primary Schools.",
-//     ],
-//     correct: "1320",
-//   },
-//   {
-//     index: 2,
-//     passages: [
-//       "“There’s no program like this in Australia,” Ms. Bocking said, who devised the project as the final component of her community education degree at the University.",
-//       "A University of Canberra student has launched the nation’s first father- led literacy project, to encourage fathers to become more involved in their children’s literacy.",
-//       "Having worked as a literacy tutor with teenagers, Ms. Bocking saw the need for good attitudes towards reading to be formed early on-with the help of more male role models.",
-//       "Julia Bocking’s Literacy and Dads (LADS) project aims to increase the number of fathers participating as literacy helpers in K-2 school reading programs at Queanbeyan Primary Schools.",
-//     ],
-//     correct: "1320",
-//   },
-//   {
-//     index: 3,
-//     passages: ["Paragraph 1", "Paragraph 2", "Paragraph 3", "Paragraph 4"],
-//     correct: "1320",
-//   },
-// ];

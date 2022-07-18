@@ -2,7 +2,6 @@ import "./style.css";
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
-import SidebarButton from "../Layout/DefaultLayout/Sidebar/Component/SidebarButton";
 import { ReactComponent as Practice} from "../../icons/practiceWhite.svg"
 import { ReactComponent as Arrow} from "../../icons/caret.svg"
 import { ReactComponent as ArrowRev} from "../../icons/caret-reverse.svg"

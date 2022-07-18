@@ -7,8 +7,8 @@ const DraggableItemPara = ({ item, index, prefix, correctAnswer }) => {
 
   const header = Object.keys(item)[0];
   const content = item[header];
-  const defaultStyle = `min-w-[80px] p-[5px] leading-[20px]
-                    flex justify-center`;
+  const defaultStyle = `w-full min-w-[80px] p-[5px] leading-[20px]
+                        flex justify-center rounded-[6px] `;
 
   const normalStyle =  defaultStyle ;
 
@@ -23,7 +23,7 @@ const DraggableItemPara = ({ item, index, prefix, correctAnswer }) => {
           //Css
           <span
             className={
-              showAnswer && prefix === "target"
+              showAnswer && prefix !== "source"
                 ? header - 1 == correctAnswer
                   ? right
                   : wrong
