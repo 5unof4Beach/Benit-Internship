@@ -19,7 +19,7 @@ public class SingleAnswerQuestionService extends QuestionService {
     }
 
     @Override
-    public List<SingleAnswerQuestion> getQuestionByIndex(Long index){
+    public SingleAnswerQuestion getQuestionByIndex(Long index){
         return repo.findQuestionByIndex(index);
     }
 

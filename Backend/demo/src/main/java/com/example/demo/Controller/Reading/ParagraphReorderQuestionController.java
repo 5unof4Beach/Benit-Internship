@@ -22,7 +22,7 @@ public class ParagraphReorderQuestionController {
     }
 
     @GetMapping("/{index}")
-    public List<ParagraphReorderQuestion> getByIndex(@PathVariable("index") Long index){
+    public ParagraphReorderQuestion getByIndex(@PathVariable("index") Long index){
         return service.getQuestionByIndex(index);
     }
 //    POST

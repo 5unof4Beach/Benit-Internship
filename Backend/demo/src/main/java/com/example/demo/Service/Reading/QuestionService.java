@@ -7,8 +7,8 @@ import java.util.List;
 
 abstract class QuestionService {
     abstract List getAllQuestions();
-    abstract List getQuestionByIndex(Long index);
-    abstract List deleteQuestionByIndex(Long index);
+    abstract Object getQuestionByIndex(Long index);
+    abstract Object deleteQuestionByIndex(Long index);
     abstract <T, G> G createQuestion(T o);
 
     abstract Long getTotal();

@@ -23,7 +23,7 @@ public class SingleAnswerQuestionController {
     }
 
     @GetMapping("/{index}")
-    public List<SingleAnswerQuestion> getAllQuestionsByIndex(@PathVariable("index") Long idx){
+    public SingleAnswerQuestion getAllQuestionsByIndex(@PathVariable("index") Long idx){
         return service.getQuestionByIndex(idx);
     }
 

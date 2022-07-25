@@ -75,7 +75,8 @@ function onDragEnd(result, elements, setElements) {
   let destinationList = listCopy[result.destination.droppableId];
 
   if (
-    result.destination.droppableId !== "source" &&
+    // result.destination.droppableId !== "source" &&
+    result.destination.droppableId !== result.source.droppableId &&
     listCopy[result.destination.droppableId].length !== 0
   ) {
     let putBackItem = destinationList.pop();

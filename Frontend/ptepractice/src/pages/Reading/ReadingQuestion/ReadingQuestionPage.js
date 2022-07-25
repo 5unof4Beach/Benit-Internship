@@ -9,6 +9,7 @@ function ReadingQuestionPage() {
   useEffect(() => {
     getData()
       .then((res) => {
+        console.log(res)
         return res.json();
       })
       .then((res) => {
@@ -41,7 +42,7 @@ const getData = () => {
     method: "GET",
     headers: new Headers({
       Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      "Content-Type": "application/json",
+      'Content-Type': "application/json",
     }),
   };
 

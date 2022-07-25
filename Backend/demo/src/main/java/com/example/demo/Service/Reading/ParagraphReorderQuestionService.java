@@ -18,12 +18,12 @@ public class ParagraphReorderQuestionService extends QuestionService{
     }
 
     @Override
-    public List<ParagraphReorderQuestion > getQuestionByIndex(Long index){
+    public ParagraphReorderQuestion getQuestionByIndex(Long index){
         return repo.findByIndex(index);
     }
 
     @Override
-    List<ParagraphReorderQuestion> deleteQuestionByIndex(Long index) {
+    ParagraphReorderQuestion deleteQuestionByIndex(Long index) {
         return repo.deleteByIndex(index);
     }
 

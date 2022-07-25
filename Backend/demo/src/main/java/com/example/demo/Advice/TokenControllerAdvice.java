@@ -1,6 +1,8 @@
 package com.example.demo.Advice;
 
 import com.example.demo.Exception.TokenRefreshException;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -14,23 +16,41 @@ public class TokenControllerAdvice {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ErrorMessage handleTokenRefreshException(TokenRefreshException ex, WebRequest request) {
         return new ErrorMessage(
-                HttpStatus.FORBIDDEN.value(),
+                403,
                 new Date(),
                 ex.getMessage(),
                 request.getDescription(false));
     }
 
-    public class ErrorMessage {
-        private int stat;
-        private Date date;
-        private String mess;
-        private String des;
-
-        public ErrorMessage(int stat, Date date, String mess, String des) {
-            this.stat = stat;
-            this.date = date;
-            this.mess = mess;
-            this.des = des;
-        }
+    @ExceptionHandler(value = MalformedJwtException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ErrorMessage handleMalformedJwtException(MalformedJwtException ex, WebRequest request){
+        return new ErrorMessage(
+                401,
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false));
     }
+
+    @ExceptionHandler(value = IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ErrorMessage handleIllegalArgumentException(IllegalArgumentException ex, WebRequest request){
+        return new ErrorMessage(
+                402,
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(true));
+    }
+
+    @ExceptionHandler(value = ExpiredJwtException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ErrorMessage handleExpiredJwtException(ExpiredJwtException ex, WebRequest request){
+        return new ErrorMessage(
+                403,
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false));
+    }
+
+
 }

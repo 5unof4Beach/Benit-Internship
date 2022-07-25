@@ -18,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
 
@@ -109,10 +110,16 @@ public class AuthController {
                     System.out.println(new TokenRefreshResponse(jwt, refreshToken).toString());
                     return new TokenRefreshResponse(jwt, refreshToken);
                 })
-                .orElseThrow(() -> new TokenRefreshException(refreshToken,
-                "Refresh token is not in database!"));
+                .orElseThrow(() -> new TokenRefreshException(refreshToken, "Refresh token is not in database!"));
     }
 
+    @GetMapping
+    public LoggedInStateResponse logInCheck(HttpServletRequest request){
+        String jwtToken = tokenProvider.getTokenFromRequest(request);
+        tokenProvider.validateToken(jwtToken);
+
+        return new LoggedInStateResponse(true);
+    }
 
     @PostMapping("/admin")
     public FakeMessage admin(){

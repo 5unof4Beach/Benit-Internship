@@ -53,17 +53,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private String getTokenFromRequest(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-        // Kiểm tra xem header Authorization có chứa thông tin jwt không
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7);
-        }
-        return null;
-    }
-
     private void authorizeJwtToken(HttpServletRequest request){
-        String jwt = getTokenFromRequest(request);
+        String jwt = tokenProvider.getTokenFromRequest(request);
 
         if (StringUtils.hasText(jwt) && (Boolean) tokenProvider.validateToken(jwt)) {
             // Lấy id user từ chuỗi jwt
@@ -83,7 +74,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private void authorizeGoogleToken(HttpServletRequest request) throws IOException {
 
-        String token = getTokenFromRequest(request);
+        String token = tokenProvider.getTokenFromRequest(request);
 
         GoogleUser googlePojo = googleUtils.getUserInfo(token);
         UserDetails userDetail = googleUtils.buildUser(googlePojo);

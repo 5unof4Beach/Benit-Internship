@@ -14,43 +14,6 @@ function Signin() {
   
   let navigate = useNavigate();
 
-  const handleSignIn = () => {
-    const URL = 'http://localhost:8080/auth/login'
-
-    let options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: userName,
-        password: password,
-      }),
-    };
-
-    fetch(URL, options)
-      .then((res) => {
-        if (res.ok) return res.json();
-
-        throw Error(res.status);
-      })
-      .then((res) => {
-        console.log(res);
-        localStorage.setItem("accessToken", res.accessToken);
-        localStorage.setItem("refreshToken", res.refreshToken);
-        localStorage.setItem("userName", res.userName);
-        localStorage.setItem('roles',res.roles)
-        localStorage.setItem("loggedIn", true);
-
-        setLoggedIn(!loggedIn);
-        navigate("/");
-      })
-      .catch((Error) => {
-        console.log("Dang nhap ko thanh cong");
-        console.log(Error);
-      });
-  };
-
   return (
     <div
       className="
@@ -90,7 +53,7 @@ function Signin() {
             border-black 
             border-[2px]
         "
-        onClick={handleSignIn}
+        onClick={() => handleSignIn(userName, password, loggedIn, setLoggedIn, navigate)}
       >
         Sign In
       </button>
@@ -101,6 +64,43 @@ function Signin() {
     </div>
   );
 }
+
+const handleSignIn = (userName, password, loggedIn, setLoggedIn, navigate) => {
+  const URL = 'http://localhost:8080/auth/login'
+
+  let options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username: userName,
+      password: password,
+    }),
+  };
+
+  fetch(URL, options)
+    .then((res) => {
+      if (res.ok) return res.json();
+
+      throw Error(res.status);
+    })
+    .then((res) => {
+      console.log(res);
+      localStorage.setItem("accessToken", res.accessToken);
+      localStorage.setItem("refreshToken", res.refreshToken);
+      localStorage.setItem("userName", res.userName);
+      localStorage.setItem('roles',res.roles)
+      localStorage.setItem("loggedIn", true);
+
+      setLoggedIn(!loggedIn);
+      navigate("/");
+    })
+    .catch((Error) => {
+      console.log("Dang nhap ko thanh cong");
+      console.log(Error);
+    });
+};
 
 function GoogleSignin() {
   const redirect_uri = "http://localhost:3000/signin/googlesignin";

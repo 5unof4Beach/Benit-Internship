@@ -6,8 +6,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface ParagraphReorderQuestionRepo extends MongoRepository<ParagraphReorderQuestion, String> {
-    public List<ParagraphReorderQuestion> findByIndex(Long index);
-    public List<ParagraphReorderQuestion> deleteByIndex(Long index);
+    public ParagraphReorderQuestion findByIndex(Long index);
+    public ParagraphReorderQuestion deleteByIndex(Long index);
 
     public long count();
 }

@@ -26,7 +26,7 @@ const publicRoutes = [
     {path: '/signin/googlesignin', component: GoogleSignin, layout: HeaderOnlyLayout},
     {path: '/reading', component: Reading},
     {path: '/reading_reorder_paragraph', component: ReadingReorderPage, layout:HeaderOnlyLayout},
-    {path: '/reading_fillin_blank', component: ReadingFillInBlankPage, layout:HeaderOnlyLayout}
+    {path: '/reading_fillin_blank', component: ReadingFillInBlankPage, layout:HeaderOnlyLayout},
   ]
   
   const privateRoutes = [
